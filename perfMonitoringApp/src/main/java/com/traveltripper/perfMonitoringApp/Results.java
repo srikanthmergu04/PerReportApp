@@ -296,161 +296,153 @@ public class Results extends javax.swing.JFrame {
 			e.printStackTrace();
 		}
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
+	       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+	        setResizable(false);
 
-        contentPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 255, 51)));
+	        contentPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 255, 51)));
 
-        tableScrollPane.setAutoscrolls(true);
+	        tableScrollPane.setAutoscrolls(true);
 
-        table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+	        table.setModel(new javax.swing.table.DefaultTableModel(
+	            new Object [][] {
 
-            },
-            new String [] {
+	            },
+	            new String [] {
 
-            }
-        ));
-        tableScrollPane.setViewportView(table);
+	            }
+	        ));
+	        tableScrollPane.setViewportView(table);
 
-        statisticsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
+	        statisticsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
 
-        statisticsLabel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        statisticsLabel.setText("Statistics");
+	        statisticsLabel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+	        statisticsLabel.setText("Statistics");
 
-        failReqLabel.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
-        failReqLabel.setForeground(new java.awt.Color(255, 51, 51));
-        failReqLabel.setText("No of Failure Requests  :");
+	        failReqLabel.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+	        failReqLabel.setText("No of Failure Requests  :");
 
-        failedIseReqLabel.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
-        failedIseReqLabel.setForeground(new java.awt.Color(255, 51, 51));
-        failedIseReqLabel.setText("No of  Failure Requests due to Internal Server Error  :");
+	        failedIseReqLabel.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+	        failedIseReqLabel.setText("No of  Failure Requests due to Internal Server Error  :");
 
-        failReqValLabel.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
-        failReqValLabel.setForeground(new java.awt.Color(255, 51, 51));
-        failReqValLabel.setText("jLabel3");
+	        failReqValLabel.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+	        failReqValLabel.setText("jLabel3");
 
-        failedIseReqValLabel.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
-        failedIseReqValLabel.setForeground(new java.awt.Color(255, 51, 51));
-        failedIseReqValLabel.setText("jLabel4");
+	        failedIseReqValLabel.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+	        failedIseReqValLabel.setText("jLabel4");
 
-        failedGatewayTimoutReqLabel.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
-        failedGatewayTimoutReqLabel.setForeground(new java.awt.Color(255, 51, 51));
-        failedGatewayTimoutReqLabel.setText("No of  Failure Requests due to GATEWAY_TIMEOUT :");
+	        failedGatewayTimoutReqLabel.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+	        failedGatewayTimoutReqLabel.setText("No of  Failure Requests due to GATEWAY_TIMEOUT :");
 
-        failedGatewayTimoutReqValLabel.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
-        failedGatewayTimoutReqValLabel.setForeground(new java.awt.Color(255, 51, 51));
-        failedGatewayTimoutReqValLabel.setText("jLabel4");
+	        failedGatewayTimoutReqValLabel.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+	        failedGatewayTimoutReqValLabel.setText("jLabel4");
 
-        successReqLabel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        successReqLabel.setForeground(new java.awt.Color(51, 51, 255));
-        successReqLabel.setText("No of succeed Requests  :");
+	        successReqLabel.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+	        successReqLabel.setText("No of succeed Requests  :");
 
-        successReqValLabel.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
-        successReqValLabel.setForeground(new java.awt.Color(51, 51, 255));
-        successReqValLabel.setText("jLabel3");
+	        successReqValLabel.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+	        successReqValLabel.setText("jLabel3");
 
-        javax.swing.GroupLayout statisticsPanelLayout = new javax.swing.GroupLayout(statisticsPanel);
-        statisticsPanel.setLayout(statisticsPanelLayout);
-        statisticsPanelLayout.setHorizontalGroup(
-            statisticsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(statisticsPanelLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(statisticsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(statisticsPanelLayout.createSequentialGroup()
-                        .addGroup(statisticsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(statisticsPanelLayout.createSequentialGroup()
-                                .addComponent(failedIseReqLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(failedIseReqValLabel))
-                            .addGroup(statisticsPanelLayout.createSequentialGroup()
-                                .addComponent(failedGatewayTimoutReqLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(failedGatewayTimoutReqValLabel)))
-                        .addGap(18, 18, Short.MAX_VALUE))
-                    .addGroup(statisticsPanelLayout.createSequentialGroup()
-                        .addComponent(failReqLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(failReqValLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
-                        .addComponent(successReqLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(successReqValLabel)
-                        .addGap(59, 59, 59))))
-            .addGroup(statisticsPanelLayout.createSequentialGroup()
-                .addGap(260, 260, 260)
-                .addComponent(statisticsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        statisticsPanelLayout.setVerticalGroup(
-            statisticsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(statisticsPanelLayout.createSequentialGroup()
-                .addComponent(statisticsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(statisticsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(failReqLabel)
-                    .addComponent(failReqValLabel)
-                    .addComponent(successReqLabel)
-                    .addComponent(successReqValLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(statisticsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(failedIseReqLabel)
-                    .addComponent(failedIseReqValLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(statisticsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(failedGatewayTimoutReqLabel)
-                    .addComponent(failedGatewayTimoutReqValLabel))
-                .addGap(0, 18, Short.MAX_VALUE))
-        );
+	        javax.swing.GroupLayout statisticsPanelLayout = new javax.swing.GroupLayout(statisticsPanel);
+	        statisticsPanel.setLayout(statisticsPanelLayout);
+	        statisticsPanelLayout.setHorizontalGroup(
+	            statisticsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(statisticsPanelLayout.createSequentialGroup()
+	                .addGap(34, 34, 34)
+	                .addGroup(statisticsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                    .addGroup(statisticsPanelLayout.createSequentialGroup()
+	                        .addGroup(statisticsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                            .addGroup(statisticsPanelLayout.createSequentialGroup()
+	                                .addComponent(failedIseReqLabel)
+	                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                                .addComponent(failedIseReqValLabel))
+	                            .addGroup(statisticsPanelLayout.createSequentialGroup()
+	                                .addComponent(failedGatewayTimoutReqLabel)
+	                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+	                                .addComponent(failedGatewayTimoutReqValLabel)))
+	                        .addGap(18, 18, Short.MAX_VALUE))
+	                    .addGroup(statisticsPanelLayout.createSequentialGroup()
+	                        .addComponent(failReqLabel)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+	                        .addComponent(failReqValLabel)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
+	                        .addComponent(successReqLabel)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(successReqValLabel)
+	                        .addGap(59, 59, 59))))
+	            .addGroup(statisticsPanelLayout.createSequentialGroup()
+	                .addGap(260, 260, 260)
+	                .addComponent(statisticsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+	        );
+	        statisticsPanelLayout.setVerticalGroup(
+	            statisticsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(statisticsPanelLayout.createSequentialGroup()
+	                .addComponent(statisticsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                .addGroup(statisticsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                    .addComponent(failReqLabel)
+	                    .addComponent(failReqValLabel)
+	                    .addComponent(successReqLabel)
+	                    .addComponent(successReqValLabel))
+	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+	                .addGroup(statisticsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                    .addComponent(failedIseReqLabel)
+	                    .addComponent(failedIseReqValLabel))
+	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+	                .addGroup(statisticsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                    .addComponent(failedGatewayTimoutReqLabel)
+	                    .addComponent(failedGatewayTimoutReqValLabel))
+	                .addGap(0, 18, Short.MAX_VALUE))
+	        );
 
-        tableTitleLabel.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        tableTitleLabel.setText("Performance Test Results");
+	        tableTitleLabel.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+	        tableTitleLabel.setText("Performance Test Results");
 
-        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
-        contentPanel.setLayout(contentPanelLayout);
-        contentPanelLayout.setHorizontalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(statisticsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tableScrollPane))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tableTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(229, 229, 229))
-        );
-        contentPanelLayout.setVerticalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentPanelLayout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(tableTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(statisticsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+	        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
+	        contentPanel.setLayout(contentPanelLayout);
+	        contentPanelLayout.setHorizontalGroup(
+	            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(contentPanelLayout.createSequentialGroup()
+	                .addContainerGap()
+	                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                    .addComponent(statisticsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                    .addComponent(tableScrollPane))
+	                .addContainerGap())
+	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
+	                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                .addComponent(tableTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addGap(229, 229, 229))
+	        );
+	        contentPanelLayout.setVerticalGroup(
+	            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(contentPanelLayout.createSequentialGroup()
+	                .addGap(5, 5, 5)
+	                .addComponent(tableTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addGap(18, 18, 18)
+	                .addComponent(statisticsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+	        );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+	        getContentPane().setLayout(layout);
+	        layout.setHorizontalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+	                .addContainerGap()
+	                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                .addContainerGap())
+	        );
+	        layout.setVerticalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(layout.createSequentialGroup()
+	                .addContainerGap()
+	                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                .addContainerGap())
+	        );
 
-        pack();
-        setLocationRelativeTo(null);
+	        pack();
+	        setLocationRelativeTo(null);
     }// </editor-fold>                        
 
     /**
