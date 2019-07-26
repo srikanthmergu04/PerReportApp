@@ -40,38 +40,42 @@ public class JMeterFromScratch {
 	public void run() throws IOException {
 
 		InputStream file = this.getClass().getClassLoader().getResourceAsStream("Props/jmeter.properties");
-		
+
 		InputStream filePaths = this.getClass().getClassLoader().getResourceAsStream("Props/filePaths.properties");
-		
+
 		Properties fileProp = new Properties();
-		
+
 		fileProp.load(filePaths);
 
 		// //
 		// JMeterUtils.loadJMeterProperties("C:\\Users\\TT124\\Installations\\apache-jmeter-5.1.1\\bin\\jmeter.properties");
 
-		File jmeterHome = new File(fileProp.getProperty("jmeterHome")); //need to provide relative path
+		File jmeterHome = new File(fileProp.getProperty("jmeterHome")); // need to provide relative path
 
 		System.out.println("jmeterHome = " + jmeterHome);
 
 		String slash = System.getProperty("file.separator");
+		
+		InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Props/filePaths.properties");
+		Properties property = new Properties();
+		property.load(inputStream);
+		String resultsDir =  property.getProperty("resultsDir");
 
 		if (jmeterHome.exists()) {
-			
+
 			System.out.println("jmeterHome Exists");
-			
+
 			File jmeterProperties = new File(fileProp.getProperty("jmeterprops"));
-			
+
 			if (jmeterProperties.exists()) {
 
 				// JMeter Engine
 				StandardJMeterEngine jmeter = new StandardJMeterEngine();
-				
-				
+
 				System.out.println("jmeterProperties Exists");
 				// JMeter initialization (properties, log levels, locale, etc)
 				JMeterUtils.setJMeterHome(jmeterHome.getPath());
-				
+
 				/*
 				 * JMeterUtils.loadProperties("reportgenerator.properties");
 				 * JMeterUtils.loadProperties("saveservice.properties");
@@ -79,12 +83,9 @@ public class JMeterFromScratch {
 				 * JMeterUtils.loadProperties("upgrade.properties");
 				 * JMeterUtils.loadProperties("user.properties");
 				 */
-				
-				
-				
 
 				JMeterUtils.loadJMeterProperties(jmeterProperties.getPath());
-			
+
 				JMeterUtils.initLogging();// you can comment this line out to see extra log messages of i.e. DEBUG level
 				JMeterUtils.initLocale();
 
@@ -140,7 +141,7 @@ public class JMeterFromScratch {
 				httpSampler.addNonEncodedArgument("departureDate", "${departureDate}", "=");
 				httpSampler.addNonEncodedArgument("numberOfAdults", "${numberOfAdults}", "=");
 				httpSampler.addNonEncodedArgument("numberOfChildren", "${numberOfChildren}", "=");
-				httpSampler.addNonEncodedArgument("groupCodes", "", "="); //$
+				httpSampler.addNonEncodedArgument("groupCodes", "${groupCodes}", "="); // $
 				httpSampler.addNonEncodedArgument("accessCode", "", "=");
 				httpSampler.addNonEncodedArgument("trNumber1", "", "=");
 				httpSampler.addNonEncodedArgument("trNumber2", "", "=");
@@ -186,20 +187,17 @@ public class JMeterFromScratch {
 				// csvData
 				//
 				String fiName = "Availbility.csv";
-	  			String wrDir = System.getProperty("user.dir");
-	  			
-	  			
-	  			
-	  			String abPathName = wrDir+File.separator+fiName;
-	  			
+				String wrDir = System.getProperty("user.dir");
+
+				String abPathName = wrDir + File.separator +resultsDir+File.separator+ fiName;
+
 				CSVDataSet csvDataset = new CSVDataSet();
 				csvDataset.setName("Availability_dateRange_NumberOdAdults_Children");
 				csvDataset.setProperty(TestElement.TEST_CLASS, CSVDataSet.class.getName());
 				csvDataset.setProperty(TestElement.GUI_CLASS, TestBeanGUI.class.getName());
 				csvDataset.setEnabled(true);
 				csvDataset.setProperty("filename", abPathName);
-				csvDataset.setProperty("variableNames",
-						"arrivalDate,departureDate,numberOfAdults,numberOfChildren");
+				csvDataset.setProperty("variableNames", "arrivalDate,departureDate,numberOfAdults,numberOfChildren,groupCodes");
 				csvDataset.setProperty("fileEncoding", "");
 				csvDataset.setProperty("ignoreFirstLine", false);
 				csvDataset.setProperty("delimiter", ",");
@@ -262,35 +260,30 @@ public class JMeterFromScratch {
 
 				try {
 					String fileName = "AvailbilityJmx.jmx";
-		  			String worDir = System.getProperty("user.dir");
-		  			String abPath = worDir+File.separator+fileName;
-			
-		  			System.out.println("abPath = "+abPath);
-		  			
-		  			File jmxFile = new File(abPath);
-		  			
-		  			jmxFile.setWritable(true);
-		  			jmxFile.setReadable(true);
-		  			jmxFile.setExecutable(true);
-		  			
-		  			System.out.println("file = "+jmxFile);
-		  			
-		  			
-		  			
-		  			if(jmxFile.createNewFile())
-		  			{
-		  				
-		  				System.out.println(" JmxFile is created. ");
-		  			}
-		  			else
-		  			{
-		  				System.out.println(" JmxFile is Not created. ");
-		  			}
-		  			
+					String worDir = System.getProperty("user.dir");
+					String abPath = worDir + File.separator +resultsDir+File.separator+fileName;
+
+					System.out.println("abPath = " + abPath);
+
+					File jmxFile = new File(abPath);
+
+					jmxFile.setWritable(true);
+					jmxFile.setReadable(true);
+					jmxFile.setExecutable(true);
+
+					System.out.println("file = " + jmxFile);
+
+					if (jmxFile.createNewFile()) {
+
+						System.out.println(" JmxFile is created. ");
+					} else {
+						System.out.println(" JmxFile is Not created. ");
+					}
+
 					SaveService.saveTree(TestPlanHashTree, new FileOutputStream(jmxFile));
-					
+
 					System.out.println("jmx file created successfully");
-					
+
 					TestPlanHashTree.clear();
 					TestPlanHashTree = SaveService.loadTree(jmxFile);
 					System.out.println("jmx file is loaded Successfully");
@@ -313,13 +306,9 @@ public class JMeterFromScratch {
 				// Store execution results into a .jtl file
 
 				// String logFile = jmeterHome + slash + "exampleres.jtl";
-				
-				
-				
-				String logFile = System.getProperty("user.dir")+File.separator+"perfResultsJtl.jtl";
-				
-				
-				
+
+				String logFile = System.getProperty("user.dir") + File.separator +resultsDir+File.separator+ "perfResultsJtl.jtl";
+
 				System.out.println("logFile is created");
 
 				ResultCollector logger = new ResultCollector(summer);
@@ -339,11 +328,9 @@ public class JMeterFromScratch {
 				 */
 
 				// System.exit(0);
-
-				Results results = new Results();
-
-				results.setVisible(true);
-
+				
+				Results displayResults = new Results();
+				displayResults.setVisible(true);
 			}
 		}
 

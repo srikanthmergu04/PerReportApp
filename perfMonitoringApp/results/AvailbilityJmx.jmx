@@ -21,7 +21,7 @@
         <intProp name="ThreadGroup.num_threads">150</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
-        <intProp name="ThreadGroup.duration">160</intProp>
+        <intProp name="ThreadGroup.duration">60</intProp>
         <intProp name="ThreadGroup.delay">1</intProp>
       </ThreadGroup>
       <hashTree>
@@ -157,23 +157,11 @@
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Availability_dateRange_NumberOdAdults_Children" enabled="true">
-            <stringProp name="filename">results/Availbility.csv</stringProp>
-            <stringProp name="variableNames">arrivalDate,departureDate,numberOfAdults,numberOfChildren,groupCodes</stringProp>
-            <stringProp name="fileEncoding"></stringProp>
-            <boolProp name="ignoreFirstLine">false</boolProp>
-            <stringProp name="delimiter">,</stringProp>
-            <boolProp name="quotedData">false</boolProp>
-            <boolProp name="recycle">true</boolProp>
-            <boolProp name="stopThread">false</boolProp>
-            <stringProp name="shareMode">shareMode.all</stringProp>
-          </CSVDataSet>
-          <hashTree/>
           <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
             <collectionProp name="HeaderManager.headers">
               <elementProp name="Authorization" elementType="Header">
                 <stringProp name="Header.name">Authorization</stringProp>
-                <stringProp name="Header.value">CD78A0AD1104493DB1856A1819E219F3</stringProp>
+                <stringProp name="Header.value">A8B36A4F004C4841B2F0B8EBD43FAF98</stringProp>
               </elementProp>
               <elementProp name="x-api-key" elementType="Header">
                 <stringProp name="Header.name">x-api-key</stringProp>
@@ -185,6 +173,18 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Availability_dateRange_NumberOdAdults_Children" enabled="true">
+            <stringProp name="filename">C:\apps\workspace\PerReportApp\perfMonitoringApp\results\Availbility.csv</stringProp>
+            <stringProp name="variableNames">arrivalDate,departureDate,numberOfAdults,numberOfChildren,groupCodes</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <boolProp name="ignoreFirstLine">false</boolProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">false</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
           <hashTree/>
         </hashTree>
       </hashTree>

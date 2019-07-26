@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -22,6 +23,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -56,15 +58,20 @@ public class Results extends javax.swing.JFrame {
 	/**
 	 * Creates new form Results
 	 */
+
+	String path = System.getProperty("user.dir");
 	
-	String path  = System.getProperty("user.dir");
-	
+	InputStream io = null;
+	Properties prop = new Properties();
+	String resultsDir = "";
+
 	public Results() {
 		initComponents();
 
 		convertCsvToXlsx();
-		
-		//System.out.println("working directory :"+(this.getClass().getClassLoader().getResource("props/jmeter.properties").toString()));
+
+		// System.out.println("working directory
+		// :"+(this.getClass().getClassLoader().getResource("props/jmeter.properties").toString()));
 
 		// displayResultsFromCsvFile();
 
@@ -77,16 +84,15 @@ public class Results extends javax.swing.JFrame {
 
 		// open input file
 		BufferedReader br;
-		
-		
-				
+
 		try {
-			br = new BufferedReader(new FileReader(new File(System.getProperty("user.dir")+File.separator+"perfResultsJtl.jtl")));
-			
-			System.out.println("reading .jtl file"+br);
-			
-		//	System.out.println(path+"/results/jmeterResults.jtl");
-			
+			br = new BufferedReader(
+					new FileReader(new File(System.getProperty("user.dir") + File.separator +resultsDir+File.separator+ "perfResultsJtl.jtl")));
+
+			System.out.println("reading .jtl file" + br);
+
+			// System.out.println(path+"/results/jmeterResults.jtl");
+
 			// create sheet
 			Workbook wb = new XSSFWorkbook();
 			Sheet sheet = wb.createSheet();
@@ -111,12 +117,12 @@ public class Results extends javax.swing.JFrame {
 			}
 			// write to xlsx
 
-			FileOutputStream out = new FileOutputStream(System.getProperty("user.dir")+File.separator+"perfResultsxlsx.xlsx");
+			FileOutputStream out = new FileOutputStream(
+					System.getProperty("user.dir") + File.separator +resultsDir+File.separator+"perfResultsxlsx.xlsx");
 			wb.write(out);
-			
+
 			System.out.println(" xlsx file is created");
-			
-			
+
 			// close resources
 			br.close();
 			out.close();
@@ -137,23 +143,23 @@ public class Results extends javax.swing.JFrame {
 		table.setAutoResizeMode(table.AUTO_RESIZE_OFF);
 
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
-		
+
 		model.setColumnIdentifiers(new Object[] { "timeStamp", "elapsed", "label", "responseCode", "responseMessage",
 				"threadName", "dataType", "success", "failureMessage", "bytes", "sentBytes", "grpThreads", "allThreads",
 				"URL", "Latency", "IdleTime", "Connect" });
 
 		try {
-			File exFile = new File(System.getProperty("user.dir")+File.separator+"perfResultsxlsx.xlsx");
-			
+			File exFile = new File(System.getProperty("user.dir") + File.separator +resultsDir+File.separator+ "perfResultsxlsx.xlsx");
+
 			System.out.println(" File xlsx opened in display Results Method ");
-			
+
 			FileInputStream exFis = new FileInputStream(exFile);
 			BufferedInputStream exBis = new BufferedInputStream(exFis);
 			XSSFWorkbook excel = new XSSFWorkbook(exBis);
 
 			XSSFSheet exSheet = excel.getSheetAt(0);
 
-			for (int row = 0; row < exSheet.getLastRowNum()+1; row++) {
+			for (int row = 0; row < exSheet.getLastRowNum() + 1; row++) {
 				XSSFRow exRow = exSheet.getRow(row);
 
 				XSSFCell timeStamp = exRow.getCell(0);
@@ -173,8 +179,8 @@ public class Results extends javax.swing.JFrame {
 				XSSFCell Latency = exRow.getCell(14);
 				XSSFCell IdleTime = exRow.getCell(15);
 				XSSFCell Connect = exRow.getCell(16);
-				
-				//coloring cells in jtable
+
+				// coloring cells in jtable
 
 				model.insertRow(row,
 						new Object[] { timeStamp, elapsed, label, responseCode, responseMessage, threadName, dataType,
@@ -182,109 +188,89 @@ public class Results extends javax.swing.JFrame {
 								IdleTime, Connect });
 
 			}
-						
-			
+
 			int iSECount = 0;
 			int timeOutCount = 0;
-			
+
 			List<Integer> iSERows = new ArrayList<Integer>();
 			List<Integer> timeOutRows = new ArrayList<Integer>();
-		//	List<Integer> latency = new ArrayList<Integer>();
-			
+			// List<Integer> latency = new ArrayList<Integer>();
+
 			TreeMap<Integer, Integer> latencyRowMap = new TreeMap<Integer, Integer>();
-			
-			for(int r = 0 ; r < exSheet.getLastRowNum()+1; r++)
-			{
+
+			for (int r = 0; r < exSheet.getLastRowNum() + 1; r++) {
 				XSSFRow exRow = exSheet.getRow(r);
-				
-				//System.out.println(" result =  "+exRow.getCell(4).getStringCellValue());
-				
-				if((exRow.getCell(4).getStringCellValue()).equalsIgnoreCase("Internal Server Error"))
-				{
-					//System.out.println("hello");
-					
-					iSECount = iSECount+1;
+
+				// System.out.println(" result = "+exRow.getCell(4).getStringCellValue());
+
+				if ((exRow.getCell(4).getStringCellValue()).equalsIgnoreCase("Internal Server Error")) {
+					// System.out.println("hello");
+
+					iSECount = iSECount + 1;
 					iSERows.add(exRow.getRowNum());
-					
+
 				}
-				if((exRow.getCell(4).getStringCellValue()).equalsIgnoreCase("GATEWAY_TIMEOUT"))
-				{
-					
-					timeOutCount = timeOutCount +1 ;
+				if ((exRow.getCell(4).getStringCellValue()).equalsIgnoreCase("GATEWAY_TIMEOUT")) {
+
+					timeOutCount = timeOutCount + 1;
 					timeOutRows.add(exRow.getRowNum());
 				}
-				
-				if((exRow.getCell(4).getStringCellValue()).equalsIgnoreCase("OK"))
-				{
-					
-					
+
+				if ((exRow.getCell(4).getStringCellValue()).equalsIgnoreCase("OK")) {
+
 					latencyRowMap.put(Integer.valueOf(exRow.getCell(14).getStringCellValue()), exRow.getRowNum());
-					
-					
+
 				}
-				
+
 			}
-			
-			System.out.println(" Internal Server Error Count = "+iSECount);
-			System.out.println(" Gate Way TimeOut Count =  "+timeOutCount);
-			
-			System.out.print("max latency = "+latencyRowMap.lastKey());
-			
-			  int latencyRow = latencyRowMap.get(latencyRowMap.lastKey());
-			  
-			  TableColorCellRenderer renderer = new TableColorCellRenderer();
-			  
-			  renderer.setLatencyRow(latencyRow); 
-				
-				table.setDefaultRenderer(Object.class, renderer);
-			  
-			  System.out.println(" latencyRow =  "+latencyRow);
-			  
 
+			System.out.println(" Internal Server Error Count = " + iSECount);
+			System.out.println(" Gate Way TimeOut Count =  " + timeOutCount);
 
-			  CellStyle cellstyle = exSheet.getWorkbook().createCellStyle();
-			  cellstyle.setFillForegroundColor(IndexedColors.RED.getIndex());
-			  cellstyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-			  
-		
-			  
-			  Iterator<Integer> it = timeOutRows.iterator();
-			  
-			  while(it.hasNext())
-			  {
-				  
-				  XSSFRow row = exSheet.getRow(it.next());
-					
-					 for (Iterator<Cell> ri =  row.cellIterator() ; ri.hasNext();) 
-					  { 
-						  Cell cell = ri.next();
-						  cell.setCellStyle(cellstyle);
-					  }
-				  
-				  
-			  }
-			  
-			  CellStyle cellstyle1 = exSheet.getWorkbook().createCellStyle();
-			  cellstyle1.setFillForegroundColor(IndexedColors.BLUE.getIndex());
-			  cellstyle1.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-			  
-			  XSSFRow row = exSheet.getRow(latencyRow);
-				
-				 for (Iterator<Cell> ri =  row.cellIterator() ; ri.hasNext();) 
-				  { 
-					  Cell cell = ri.next();
-					  cell.setCellStyle(cellstyle1);
-				  }
-			  
-			 
-				FileOutputStream out;
-				out = new FileOutputStream(new File(path+File.separator+"PerfResutlsHighlightedExcelFile.xlsx"));
-				excel.write(out);
-				out.close();
-				
-				
-			
-			
+			System.out.print("max latency = " + latencyRowMap.lastKey());
+
+			int latencyRow = latencyRowMap.get(latencyRowMap.lastKey());
+
+			TableColorCellRenderer renderer = new TableColorCellRenderer();
+
+			renderer.setLatencyRow(latencyRow);
+
+			table.setDefaultRenderer(Object.class, renderer);
+
+			System.out.println(" latencyRow =  " + latencyRow);
+
+			CellStyle cellstyle = exSheet.getWorkbook().createCellStyle();
+			cellstyle.setFillForegroundColor(IndexedColors.RED.getIndex());
+			cellstyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+			Iterator<Integer> it = timeOutRows.iterator();
+
+			while (it.hasNext()) {
+
+				XSSFRow row = exSheet.getRow(it.next());
+
+				for (Iterator<Cell> ri = row.cellIterator(); ri.hasNext();) {
+					Cell cell = ri.next();
+					cell.setCellStyle(cellstyle);
+				}
+
+			}
+
+			CellStyle cellstyle1 = exSheet.getWorkbook().createCellStyle();
+			cellstyle1.setFillForegroundColor(IndexedColors.BLUE.getIndex());
+			cellstyle1.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+			XSSFRow row = exSheet.getRow(latencyRow);
+
+			for (Iterator<Cell> ri = row.cellIterator(); ri.hasNext();) {
+				Cell cell = ri.next();
+				cell.setCellStyle(cellstyle1);
+			}
+
+			FileOutputStream out;
+			out = new FileOutputStream(new File(path + File.separator +resultsDir+File.separator+ "PerfResutlsHighlightedExcelFile.xlsx"));
+			excel.write(out);
+			out.close();
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -292,8 +278,6 @@ public class Results extends javax.swing.JFrame {
 		}
 
 	}
-
-
 
 	private void displayResultsFromCsvFile() {
 		// TODO Auto-generated method stub
@@ -311,7 +295,7 @@ public class Results extends javax.swing.JFrame {
 		int count = 0;
 
 		try {
-			FileReader file = new FileReader(path+"/results/jmeterResults.jtl");
+			FileReader file = new FileReader(path + "/results/jmeterResults.jtl");
 
 			BufferedReader br = new BufferedReader(file);
 
@@ -355,7 +339,17 @@ public class Results extends javax.swing.JFrame {
 		table = new javax.swing.JTable();
 		buttonPanel = new javax.swing.JPanel();
 		horizontalScrollBar = new JScrollBar();
-
+		
+		
+		io = this.getClass().getClassLoader().getResourceAsStream("Props/filePaths.properties");
+		try {
+			prop.load(io);
+			resultsDir = prop.getProperty("resultsDir");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setResizable(true);
 
@@ -451,9 +445,6 @@ public class Results extends javax.swing.JFrame {
 			}
 		});
 	}
-	
-
-	
 
 	// Variables declaration - do not modify
 	private javax.swing.JPanel buttonPanel;
