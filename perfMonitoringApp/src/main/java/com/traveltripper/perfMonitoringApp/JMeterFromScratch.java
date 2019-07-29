@@ -76,13 +76,6 @@ public class JMeterFromScratch {
 				// JMeter initialization (properties, log levels, locale, etc)
 				JMeterUtils.setJMeterHome(jmeterHome.getPath());
 
-				/*
-				 * JMeterUtils.loadProperties("reportgenerator.properties");
-				 * JMeterUtils.loadProperties("saveservice.properties");
-				 * JMeterUtils.loadProperties("system.properties");
-				 * JMeterUtils.loadProperties("upgrade.properties");
-				 * JMeterUtils.loadProperties("user.properties");
-				 */
 
 				JMeterUtils.loadJMeterProperties(jmeterProperties.getPath());
 
@@ -142,7 +135,7 @@ public class JMeterFromScratch {
 				httpSampler.addNonEncodedArgument("numberOfAdults", "${numberOfAdults}", "=");
 				httpSampler.addNonEncodedArgument("numberOfChildren", "${numberOfChildren}", "=");
 				httpSampler.addNonEncodedArgument("groupCodes", "${groupCodes}", "="); // $
-				httpSampler.addNonEncodedArgument("accessCode", "", "=");
+				httpSampler.addNonEncodedArgument("accessCode", "${accessCode}", "=");
 				httpSampler.addNonEncodedArgument("trNumber1", "", "=");
 				httpSampler.addNonEncodedArgument("trNumber2", "", "=");
 				httpSampler.addNonEncodedArgument("numberOfRooms", "1", "=");
@@ -197,7 +190,7 @@ public class JMeterFromScratch {
 				csvDataset.setProperty(TestElement.GUI_CLASS, TestBeanGUI.class.getName());
 				csvDataset.setEnabled(true);
 				csvDataset.setProperty("filename", abPathName);
-				csvDataset.setProperty("variableNames", "arrivalDate,departureDate,numberOfAdults,numberOfChildren,groupCodes");
+				csvDataset.setProperty("variableNames", "arrivalDate,departureDate,numberOfAdults,numberOfChildren,groupCodes,accessCode");
 				csvDataset.setProperty("fileEncoding", "");
 				csvDataset.setProperty("ignoreFirstLine", false);
 				csvDataset.setProperty("delimiter", ",");

@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -837,20 +839,29 @@ public class GetActionJFrame extends javax.swing.JFrame {
 				try {
 					stmt = con.createStatement();
 					ResultSet rs = stmt.executeQuery(sql);
+					
+					
 
 					int count = 0;
 
 					while (rs.next()) {
-						list.add(rs.getString(1));
+						String str = URLEncoder.encode(rs.getString(1), "UTF-8");
+						list.add(str);
 						count++;
 					}
 
 					if (bindingNameTf.getText().equalsIgnoreCase("accessCodes")) {
 
+						
 						list.add("");
 						list.add("");
 						list.add("");
 						list.add("");
+						list.add("");
+						list.add("");
+						list.add("");
+						list.add("");
+						count = count+8;
 					}
 
 					list = generateStringsByLimit(list, limit, count);
@@ -860,6 +871,9 @@ public class GetActionJFrame extends javax.swing.JFrame {
 					mymap.put(bindingNameTf.getText(), list);
 
 				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
