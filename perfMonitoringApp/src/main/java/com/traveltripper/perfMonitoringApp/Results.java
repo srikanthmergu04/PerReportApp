@@ -5,6 +5,8 @@
  */
 package com.traveltripper.perfMonitoringApp;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,11 +17,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 import java.util.TreeMap;
 
+import javax.swing.JDialog;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.table.DefaultTableModel;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -38,6 +45,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author TT124
  */
+
 public class Results extends javax.swing.JFrame {
 
     /**
@@ -53,19 +61,18 @@ public class Results extends javax.swing.JFrame {
 	
     public Results() {
         initComponents();
-        convertCsvToXlsx();
-        displayResults();
-    }
+      }
     
-	private void convertCsvToXlsx() {
+	public void convertCsvToXlsx() {
 		// TODO Auto-generated method stub
 
 		// open input file
 		BufferedReader br;
 
 		try {
+			System.out.println("apiName = "+apiName);
 			br = new BufferedReader(
-					new FileReader(new File(System.getProperty("user.dir") + File.separator +resultsDir+File.separator+ "perfResultsJtl.jtl")));
+					new FileReader(new File(System.getProperty("user.dir") + File.separator +resultsDir+File.separator+apiName+"_Jtl.jtl")));
 
 			System.out.println("reading .jtl file" + br);
 
@@ -115,12 +122,13 @@ public class Results extends javax.swing.JFrame {
 
 	}
 
-	private void displayResults() {
+	public void displayResults() {
 		// TODO Auto-generated method stub
 
 		table.setAutoResizeMode(table.AUTO_RESIZE_OFF);
 
-		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		//DefaultTableModel model = 
+		model = (DefaultTableModel) table.getModel();
 
 		model.setColumnIdentifiers(new Object[] { "timeStamp", "elapsed", "label", "responseCode", "responseMessage",
 				"threadName", "dataType", "success", "failureMessage", "bytes", "sentBytes", "grpThreads", "allThreads",
@@ -217,9 +225,11 @@ public class Results extends javax.swing.JFrame {
 
 			TableColorCellRenderer renderer = new TableColorCellRenderer();
 
-			renderer.setLatencyRow(latencyRow);
-
-			table.setDefaultRenderer(Object.class, renderer);
+			
+			  renderer.setLatencyRow(latencyRow);
+			  
+			  table.setDefaultRenderer(Object.class, renderer);
+			 
 
 			System.out.println(" latencyRow =  " + latencyRow);
 
@@ -286,6 +296,10 @@ public class Results extends javax.swing.JFrame {
         successReqLabel = new javax.swing.JLabel();
         successReqValLabel = new javax.swing.JLabel();
         tableTitleLabel = new javax.swing.JLabel();
+        cellPopUpMenu = new javax.swing.JPopupMenu();
+        model = new DefaultTableModel();
+        cellDialog = new JDialog();
+        
         
     	io = this.getClass().getClassLoader().getResourceAsStream("Props/filePaths.properties");
 		try {
@@ -313,6 +327,49 @@ public class Results extends javax.swing.JFrame {
 	        ));
 	        tableScrollPane.setViewportView(table);
 
+	        
+	        table.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+					System.out.println("mouse is clicked on jtable");
+					int selCol = table.getSelectedColumn();
+					int selRow = table.getSelectedRow();
+				
+					String selCell = model.getValueAt(selRow, selCol).toString();
+					
+					
+	
+					
+				}
+			});
+	        
 	        statisticsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
 
 	        statisticsLabel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -495,5 +552,18 @@ public class Results extends javax.swing.JFrame {
     private javax.swing.JTable table;
     private javax.swing.JScrollPane tableScrollPane;
     private javax.swing.JLabel tableTitleLabel;
-    // End of variables declaration                   
+    private javax.swing.JPopupMenu cellPopUpMenu;
+    private DefaultTableModel model;
+    private javax.swing.JDialog cellDialog;
+    
+    private String apiName;
+
+	public void setApiName(String apiName) {
+		this.apiName = apiName;
+	}
+
+   
+    // End of variables declaration
+    
+    
 }
