@@ -958,7 +958,7 @@ public class GetActionJFrame extends javax.swing.JFrame {
 			}
 				
 			
-			String fileName = "Availbility.csv";
+			String fileName = apiName+".csv";
 			String worDir = System.getProperty("user.dir");
 
 			String abPath = worDir + File.separator +resultsDir+File.separator+ fileName;
@@ -975,9 +975,9 @@ public class GetActionJFrame extends javax.swing.JFrame {
 
 			if (file.createNewFile()) {
 
-				System.out.println(" Availbility.csv is created. ");
+				System.out.println(file+" is created. ");
 			} else {
-				System.out.println(" Availbility.csv is Not created. ");
+				System.out.println(file+"is Not created. ");
 			}
 
 			FileWriter fileWritter = new FileWriter(file);
@@ -991,16 +991,16 @@ public class GetActionJFrame extends javax.swing.JFrame {
 			}
 			fileWritter.close();
 
-			System.out.println("Availbility.csv is saved");
+			System.out.println(file+" is saved");
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		/*
-		 * List<String> keys; for(int i=0;i<mymap.size();i++) { keys=mymap.get(i); }
-		 */
+		
+		Set<String> dynamicVarNames = mymap.keySet();
+		 
 
 		JMeterFromScratch jm = new JMeterFromScratch();
 
@@ -1015,7 +1015,7 @@ public class GetActionJFrame extends javax.swing.JFrame {
 		jm.setRampUpTime(rampUpTime);
 		jm.setThreadGroupVal(threadGroupVal);
 
-		// jm.setCsvVariableNames(dynamicVarNames);
+		jm.setCsvVariableNames(dynamicVarNames);
 		jm.setCsvVariableNames(mymap.keySet());
 		jm.setReqHeadMap(reqHeadMap);
 

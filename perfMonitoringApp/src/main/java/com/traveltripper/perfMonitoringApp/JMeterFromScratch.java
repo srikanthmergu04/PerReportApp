@@ -30,6 +30,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -96,7 +97,6 @@ public class JMeterFromScratch {
 
 				// LoopController
 				LoopController loopController = new LoopController();
-
 				loopController.setLoops(-1);
 				loopController.setFirst(true);
 				loopController.setProperty(TestElement.TEST_CLASS, LoopController.class.getName());
@@ -112,7 +112,6 @@ public class JMeterFromScratch {
 				threadGroup.setProperty("ThreadGroup.on_sample_error", "continue");
 				threadGroup.setProperty(TestElement.TEST_CLASS, ThreadGroup.class.getName());
 				threadGroup.setProperty(TestElement.GUI_CLASS, ThreadGroupGui.class.getName());
-
 				threadGroup.setSamplerController(loopController);
 				threadGroup.setNumThreads(threadGroupVal);
 				threadGroup.setRampUp(rampUpTime);
@@ -122,45 +121,9 @@ public class JMeterFromScratch {
 
 				// HTTP Sampler
 				HTTPSamplerProxy httpSampler = new HTTPSamplerProxy();
+				
+				httpSampler = getHTTPSamplerProxy();
 
-				httpSampler.setName("Availability");
-				httpSampler.setProperty(TestElement.TEST_CLASS, HTTPSamplerProxy.class.getName());
-				httpSampler.setProperty(TestElement.GUI_CLASS, HttpTestSampleGui.class.getName());
-				httpSampler.setEnabled(true);
-
-				httpSampler.addNonEncodedArgument("propertyId", "1193", "=");
-				httpSampler.addNonEncodedArgument("areaId", "", "=");
-				httpSampler.addNonEncodedArgument("arrivalDate", "${arrivalDate}", "=");
-				httpSampler.addNonEncodedArgument("departureDate", "${departureDate}", "=");
-				httpSampler.addNonEncodedArgument("numberOfAdults", "${numberOfAdults}", "=");
-				httpSampler.addNonEncodedArgument("numberOfChildren", "${numberOfChildren}", "=");
-				httpSampler.addNonEncodedArgument("groupCodes", "${groupCodes}", "="); // $
-				httpSampler.addNonEncodedArgument("accessCode", "${accessCode}", "=");
-				httpSampler.addNonEncodedArgument("trNumber1", "", "=");
-				httpSampler.addNonEncodedArgument("trNumber2", "", "=");
-				httpSampler.addNonEncodedArgument("numberOfRooms", "1", "=");
-				httpSampler.addNonEncodedArgument("templateIds", "", "=");
-				httpSampler.addNonEncodedArgument("rateCodes", "", "=");
-				httpSampler.addNonEncodedArgument("waitListReservationId", "", "=");
-				httpSampler.addNonEncodedArgument("offerTemplates", "", "=");
-				httpSampler.addNonEncodedArgument("nonOfferTemplates", "", "=");
-				httpSampler.addNonEncodedArgument("agentId", "TTuser5", "=");
-				httpSampler.addNonEncodedArgument("_ts", "1559644431876", "=");
-				httpSampler.addNonEncodedArgument("_ts", "1559644431876", "=");
-
-				httpSampler.setDomain(domain);
-				httpSampler.setProperty("HTTPSampler.port", "");
-				httpSampler.setProtocol(protocol);
-				httpSampler.setProperty("HTTPSampler.contentEncoding", "");
-				httpSampler.setPath(path);
-				httpSampler.setMethod(method);
-				httpSampler.setFollowRedirects(true);
-				httpSampler.setAutoRedirects(false);
-				httpSampler.setUseKeepAlive(true);
-				httpSampler.setDoMultipartPost(false);
-				httpSampler.setEmbeddedUrlRE("");
-				httpSampler.setConnectTimeout("");
-				httpSampler.setResponseTimeout("");
 
 				// HeaderManager
 				HeaderManager headerManager = new HeaderManager();
@@ -179,18 +142,31 @@ public class JMeterFromScratch {
 
 				// csvData
 				//
-				String fiName = "Availbility.csv";
+				String fiName = apiName+".csv";
 				String wrDir = System.getProperty("user.dir");
 
 				String abPathName = wrDir + File.separator +resultsDir+File.separator+ fiName;
 
 				CSVDataSet csvDataset = new CSVDataSet();
-				csvDataset.setName("Availability_dateRange_NumberOdAdults_Children");
+				csvDataset.setName("CSV_Data");
 				csvDataset.setProperty(TestElement.TEST_CLASS, CSVDataSet.class.getName());
 				csvDataset.setProperty(TestElement.GUI_CLASS, TestBeanGUI.class.getName());
 				csvDataset.setEnabled(true);
 				csvDataset.setProperty("filename", abPathName);
-				csvDataset.setProperty("variableNames", "arrivalDate,departureDate,numberOfAdults,numberOfChildren,groupCodes,accessCode");
+				
+				String dynamicVarNames = "";
+				
+				Iterator<String> it = csvVariableNames.iterator();
+				
+				while(it.hasNext())
+				{
+					dynamicVarNames = dynamicVarNames+it.next();
+					dynamicVarNames = dynamicVarNames+",";
+				}
+				
+				System.out.println("Dynamic Variable Names = "+dynamicVarNames);
+				
+				csvDataset.setProperty("variableNames", dynamicVarNames);
 				csvDataset.setProperty("fileEncoding", "");
 				csvDataset.setProperty("ignoreFirstLine", false);
 				csvDataset.setProperty("delimiter", ",");
@@ -252,7 +228,7 @@ public class JMeterFromScratch {
 				headerAndCsvDataHashTree.add(csvDataset);
 
 				try {
-					String fileName = "AvailbilityJmx.jmx";
+					String fileName = apiName+"_Jmx.jmx";
 					String worDir = System.getProperty("user.dir");
 					String abPath = worDir + File.separator +resultsDir+File.separator+fileName;
 
@@ -300,9 +276,9 @@ public class JMeterFromScratch {
 
 				// String logFile = jmeterHome + slash + "exampleres.jtl";
 
-				String logFile = System.getProperty("user.dir") + File.separator +resultsDir+File.separator+ "perfResultsJtl.jtl";
+				String logFile = System.getProperty("user.dir") + File.separator +resultsDir+File.separator+ apiName +"_Jtl.jtl";
 
-				System.out.println("logFile is created");
+				System.out.println(logFile+" is created");
 
 				ResultCollector logger = new ResultCollector(summer);
 				logger.setFilename(logFile);
@@ -323,7 +299,11 @@ public class JMeterFromScratch {
 				// System.exit(0);
 				
 				Results displayResults = new Results();
+				displayResults.setApiName(apiName);
+				displayResults.convertCsvToXlsx();
+				displayResults.displayResults();
 				displayResults.setVisible(true);
+			
 			}
 		}
 
@@ -333,18 +313,71 @@ public class JMeterFromScratch {
 
 	}
 
+	public static String getApiName() {
+		return apiName;
+	}
+
+	private static HTTPSamplerProxy getHTTPSamplerProxy() {
+		// TODO Auto-generated method stub
+		
+		HTTPSamplerProxy httpSampler = new HTTPSamplerProxy();
+		
+		httpSampler.setName(apiName);
+		httpSampler.setProperty(TestElement.TEST_CLASS, HTTPSamplerProxy.class.getName());
+		httpSampler.setProperty(TestElement.GUI_CLASS, HttpTestSampleGui.class.getName());
+		httpSampler.setEnabled(true);
+
+		httpSampler.addNonEncodedArgument("propertyId", "1193", "=");
+		httpSampler.addNonEncodedArgument("areaId", "", "=");
+		httpSampler.addNonEncodedArgument("arrivalDate", "${arrivalDate}", "=");
+		httpSampler.addNonEncodedArgument("departureDate", "${departureDate}", "=");
+		httpSampler.addNonEncodedArgument("numberOfAdults", "${numberOfAdults}", "=");
+		httpSampler.addNonEncodedArgument("numberOfChildren", "${numberOfChildren}", "=");
+		httpSampler.addNonEncodedArgument("groupCodes", "${groupCodes}", "="); // $
+		httpSampler.addNonEncodedArgument("accessCode", "${accessCode}", "=");
+		httpSampler.addNonEncodedArgument("trNumber1", "", "=");
+		httpSampler.addNonEncodedArgument("trNumber2", "", "=");
+		httpSampler.addNonEncodedArgument("numberOfRooms", "1", "=");
+		httpSampler.addNonEncodedArgument("templateIds", "", "=");
+		httpSampler.addNonEncodedArgument("rateCodes", "", "=");
+		httpSampler.addNonEncodedArgument("waitListReservationId", "", "=");
+		httpSampler.addNonEncodedArgument("offerTemplates", "", "=");
+		httpSampler.addNonEncodedArgument("nonOfferTemplates", "", "=");
+		httpSampler.addNonEncodedArgument("agentId", "TTuser5", "=");
+		httpSampler.addNonEncodedArgument("_ts", "1559644431876", "=");
+		httpSampler.addNonEncodedArgument("_ts", "1559644431876", "=");
+
+		httpSampler.setDomain(domain);
+		httpSampler.setProperty("HTTPSampler.port", "");
+		httpSampler.setProtocol(protocol);
+		httpSampler.setProperty("HTTPSampler.contentEncoding", "");
+		httpSampler.setPath(path);
+		httpSampler.setMethod(method);
+		httpSampler.setFollowRedirects(true);
+		httpSampler.setAutoRedirects(false);
+		httpSampler.setUseKeepAlive(true);
+		httpSampler.setDoMultipartPost(false);
+		httpSampler.setEmbeddedUrlRE("");
+		httpSampler.setConnectTimeout("");
+		httpSampler.setResponseTimeout("");
+		
+		return httpSampler;
+		
+		
+	}
+
 	private int threadGroupVal;
 	private int durationTime;
 	private int rampUpTime;
 	private int delayTime;
 
-	private String environment;
-	private String apiName;
-	private String protocol;
-	private String method;
-	private String domain;
+	private static String environment;
+	private static String apiName;
+	private static String protocol;
+	private static String method;
+	private static String domain;
 
-	private String path;
+	private static String path;
 
 	private Set<String> csvVariableNames;
 
