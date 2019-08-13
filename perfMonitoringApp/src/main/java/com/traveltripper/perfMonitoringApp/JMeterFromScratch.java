@@ -291,11 +291,14 @@ public class JMeterFromScratch {
 				displayResults.setVisible(true);
 			
 			}
+			
+		}
+		else {
+			System.err.println("jmeter.home property is not set or pointing to incorrect location");
+			 System.exit(1);
 		}
 
-		// System.err.println("jmeter.home property is not set or pointing to incorrect
-		// location");
-		// System.exit(1);
+		 
 
 	}
 
@@ -360,27 +363,7 @@ public class JMeterFromScratch {
 			httpSampler.addNonEncodedArgument(queryKey, queryParamsMap.get(queryKey), "=");
 		}
 
-		/*
-		 * httpSampler.addNonEncodedArgument("propertyId", "1193", "=");
-		 * httpSampler.addNonEncodedArgument("areaId", "", "=");
-		 * httpSampler.addNonEncodedArgument("arrivalDate", "${arrivalDate}", "=");
-		 * httpSampler.addNonEncodedArgument("departureDate", "${departureDate}", "=");
-		 * httpSampler.addNonEncodedArgument("numberOfAdults", "${numberOfAdults}",
-		 * "="); httpSampler.addNonEncodedArgument("numberOfChildren",
-		 * "${numberOfChildren}", "="); httpSampler.addNonEncodedArgument("groupCodes",
-		 * "${groupCodes}", "="); // $ httpSampler.addNonEncodedArgument("accessCode",
-		 * "${accessCode}", "="); httpSampler.addNonEncodedArgument("trNumber1", "",
-		 * "="); httpSampler.addNonEncodedArgument("trNumber2", "", "=");
-		 * httpSampler.addNonEncodedArgument("numberOfRooms", "1", "=");
-		 * httpSampler.addNonEncodedArgument("templateIds", "", "=");
-		 * httpSampler.addNonEncodedArgument("rateCodes", "", "=");
-		 * httpSampler.addNonEncodedArgument("waitListReservationId", "", "=");
-		 * httpSampler.addNonEncodedArgument("offerTemplates", "", "=");
-		 * httpSampler.addNonEncodedArgument("nonOfferTemplates", "", "=");
-		 * httpSampler.addNonEncodedArgument("agentId", "TTuser5", "=");
-		 * httpSampler.addNonEncodedArgument("_ts", "1559644431876", "=");
-		 * httpSampler.addNonEncodedArgument("_ts", "1559644431876", "=");
-		 */
+	
 
 		httpSampler.setDomain(domain);
 		httpSampler.setProperty("HTTPSampler.port", "");

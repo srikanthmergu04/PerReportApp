@@ -955,6 +955,7 @@ public class GetActionJFrame extends javax.swing.JFrame {
 							list.add(groupCodes[i]);
 							i++;
 						}
+						list = generateStringsByLimit(list, limit, list.size());
 						mymap.put(bindingName, list);
 						queryParamsMap.put(bindingName, "${" + bindingName + "}");
 					}
@@ -1783,7 +1784,7 @@ public class GetActionJFrame extends javax.swing.JFrame {
 			case "Submit":
 				submitButtonActionPerformed(e);
 				break;
-			case "addMoreButton":
+			case "Addmore":
 				addMoreButtonActionPerformed(e);
 				break;
 			case "Reset":

@@ -95,7 +95,7 @@ public class PerfMonitoringReportMain extends javax.swing.JFrame {
 
 		apiNameLabel.setText(prop.getProperty("apiNameLabel"));
 
-		protocolLabel.setText(prop.getProperty("apiNameLabel"));
+		protocolLabel.setText(prop.getProperty("protocolLabel"));
 
 		methodLabel.setText(prop.getProperty("methodLabel"));
 

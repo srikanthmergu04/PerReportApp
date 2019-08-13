@@ -5,6 +5,7 @@
  */
 package com.traveltripper.perfMonitoringApp;
 
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.BufferedInputStream;
@@ -23,6 +24,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.TreeMap;
 
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -61,7 +63,13 @@ public class Results extends javax.swing.JFrame {
 	
     public Results() {
         initComponents();
+        setIcon();
       }
+    public void setIcon() {
+		Image image = new ImageIcon(this.getClass().getClassLoader().getResource("images/TraveltripperICon.png"))
+				.getImage();
+		setIconImage(image);
+	}
     
 	public void convertCsvToXlsx() {
 		// TODO Auto-generated method stub
@@ -72,7 +80,7 @@ public class Results extends javax.swing.JFrame {
 		try {
 			System.out.println("apiName = "+apiName);
 			br = new BufferedReader(
-					new FileReader(new File(System.getProperty("user.dir") + File.separator +resultsDir+File.separator+apiName+"_Jtl.jtl")));
+					new FileReader(new File(System.getProperty("user.dir") + File.separator +resultsDir+File.separator+"testReports.jtl")));//apiName+"_Jtl.jtl"
 
 			System.out.println("reading .jtl file" + br);
 
@@ -300,7 +308,7 @@ public class Results extends javax.swing.JFrame {
         model = new DefaultTableModel();
         cellDialog = new JDialog();
         
-        
+        setTitle("Performance Monitoring Tool - travel tripper");
     	io = this.getClass().getClassLoader().getResourceAsStream("Props/filePaths.properties");
 		try {
 			prop.load(io);
