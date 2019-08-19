@@ -57,11 +57,11 @@ public class JMeterFromScratch {
 		System.out.println("jmeterHome = " + jmeterHome);
 
 		String slash = System.getProperty("file.separator");
-		
+
 		InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Props/filePaths.properties");
 		Properties property = new Properties();
 		property.load(inputStream);
-		resultsDir =  property.getProperty("resultsDir");
+		resultsDir = property.getProperty("resultsDir");
 
 		if (jmeterHome.exists()) {
 
@@ -77,7 +77,6 @@ public class JMeterFromScratch {
 				System.out.println("jmeterProperties Exists");
 				// JMeter initialization (properties, log levels, locale, etc)
 				JMeterUtils.setJMeterHome(jmeterHome.getPath());
-
 
 				JMeterUtils.loadJMeterProperties(jmeterProperties.getPath());
 
@@ -122,9 +121,8 @@ public class JMeterFromScratch {
 
 				// HTTP Sampler
 				HTTPSamplerProxy httpSampler = new HTTPSamplerProxy();
-				
-				httpSampler = getHTTPSamplerProxy();
 
+				httpSampler = getHTTPSamplerProxy();
 
 				// HeaderManager
 				HeaderManager headerManager = new HeaderManager();
@@ -142,20 +140,13 @@ public class JMeterFromScratch {
 				}
 
 				CSVDataSet csvDataset = null;
-				System.out.println("csvVariableNames size = "+csvVariableNames.size());
-				if(csvVariableNames.size() == 0) {
+				System.out.println("csvVariableNames size = " + csvVariableNames.size());
+				if (csvVariableNames.size() == 0) {
 					System.out.println("no dynamicVariable Names");
-				}
-				else {
+				} else {
 					csvDataset = new CSVDataSet();
 					csvDataset = getCSVData();
 				}
-				
-				
-				
-				
-						
-
 
 				/*
 				 * // Construct Test Plan from previously initialized elements
@@ -207,20 +198,17 @@ public class JMeterFromScratch {
 				headerAndCsvDataHashTree = httpSamplerHashTree.add(httpSampler);
 
 				headerAndCsvDataHashTree.add(headerManager);
-				if(csvDataset == null) {
+				if (csvDataset == null) {
 					System.out.println("csvDataSet is not added to HashTree");
-						
+
+				} else {
+					headerAndCsvDataHashTree.add(csvDataset);
 				}
-				else {
-					headerAndCsvDataHashTree.add(csvDataset);	
-				}
-				
 
 				try {
-					String fileName = apiName+"_Jmx.jmx";
+					String fileName = apiName + "_Jmx.jmx";
 					String worDir = System.getProperty("user.dir");
-					String abPath = worDir + File.separator +resultsDir+File.separator+fileName;
-
+					String abPath = worDir + File.separator + resultsDir + File.separator + fileName;
 
 					File jmxFile = new File(abPath);
 
@@ -230,18 +218,18 @@ public class JMeterFromScratch {
 
 					if (jmxFile.createNewFile()) {
 
-						System.out.println(fileName+"is created. ");
+						System.out.println(fileName + "is created. ");
 					} else {
-						System.out.println(fileName+"is Not created. ");
+						System.out.println(fileName + "is Not created. ");
 					}
 
 					SaveService.saveTree(TestPlanHashTree, new FileOutputStream(jmxFile));
 
-					System.out.println(fileName+"file created successfully");
+					System.out.println(fileName + "file created successfully");
 
 					TestPlanHashTree.clear();
 					TestPlanHashTree = SaveService.loadTree(jmxFile);
-					System.out.println(fileName+" is loaded Successfully");
+					System.out.println(fileName + " is loaded Successfully");
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch blockj
 					e.printStackTrace();
@@ -262,9 +250,10 @@ public class JMeterFromScratch {
 
 				// String logFile = jmeterHome + slash + "exampleres.jtl";
 
-				String logFile = System.getProperty("user.dir") + File.separator +resultsDir+File.separator+ apiName +"_Jtl.jtl";
+				String logFile = System.getProperty("user.dir") + File.separator + resultsDir + File.separator + apiName
+						+ "_Jtl.jtl";
 
-				System.out.println(logFile+" is created");
+				System.out.println(logFile + " is created");
 
 				ResultCollector logger = new ResultCollector(summer);
 				logger.setFilename(logFile);
@@ -283,53 +272,49 @@ public class JMeterFromScratch {
 				 */
 
 				// System.exit(0);
-				
+
 				Results displayResults = new Results();
 				displayResults.setApiName(apiName);
 				displayResults.convertCsvToXlsx();
 				displayResults.displayResults();
 				displayResults.setVisible(true);
-			
-			}
-			
-		}
-		else {
-			System.err.println("jmeter.home property is not set or pointing to incorrect location");
-			 System.exit(1);
-		}
 
-		 
+			}
+
+		} else {
+			System.err.println("jmeter.home property is not set or pointing to incorrect location");
+			System.exit(1);
+		}
 
 	}
 
 	private static CSVDataSet getCSVData() {
-		
+
 		// TODO Auto-generated method stub
-		
-		String fiName = apiName+".csv";
+
+		String fiName = apiName + ".csv";
 		String wrDir = System.getProperty("user.dir");
-		
-		String abPathName = wrDir + File.separator +resultsDir+File.separator+ fiName;
-		
+
+		String abPathName = wrDir + File.separator + resultsDir + File.separator + fiName;
+
 		CSVDataSet csvDataset = new CSVDataSet();
 		csvDataset.setName("CSV_Data");
 		csvDataset.setProperty(TestElement.TEST_CLASS, CSVDataSet.class.getName());
 		csvDataset.setProperty(TestElement.GUI_CLASS, TestBeanGUI.class.getName());
 		csvDataset.setEnabled(true);
 		csvDataset.setProperty("filename", abPathName);
-		
+
 		String dynamicVarNames = "";
-		
+
 		Iterator<String> it = csvVariableNames.iterator();
-		
-		while(it.hasNext())
-		{
-			dynamicVarNames = dynamicVarNames+it.next();
-			dynamicVarNames = dynamicVarNames+",";
+
+		while (it.hasNext()) {
+			dynamicVarNames = dynamicVarNames + it.next();
+			dynamicVarNames = dynamicVarNames + ",";
 		}
-		
-		System.out.println("Dynamic Variable Names = "+dynamicVarNames);
-		
+
+		System.out.println("Dynamic Variable Names = " + dynamicVarNames);
+
 		csvDataset.setProperty("variableNames", dynamicVarNames);
 		csvDataset.setProperty("fileEncoding", "");
 		csvDataset.setProperty("ignoreFirstLine", false);
@@ -338,7 +323,7 @@ public class JMeterFromScratch {
 		csvDataset.setProperty("recycle", true);
 		csvDataset.setProperty("stopThread", false);
 		csvDataset.setProperty("shareMode", "shareMode.all");
-		
+
 		return csvDataset;
 	}
 
@@ -348,22 +333,17 @@ public class JMeterFromScratch {
 
 	private static HTTPSamplerProxy getHTTPSamplerProxy() {
 		// TODO Auto-generated method stub
-		
-		
-		
+
 		HTTPSamplerProxy httpSampler = new HTTPSamplerProxy();
-		
+
 		httpSampler.setName(apiName);
 		httpSampler.setProperty(TestElement.TEST_CLASS, HTTPSamplerProxy.class.getName());
 		httpSampler.setProperty(TestElement.GUI_CLASS, HttpTestSampleGui.class.getName());
 		httpSampler.setEnabled(true);
-		
-		for(String queryKey : queryParamsMap.keySet())
-		{
+
+		for (String queryKey : queryParamsMap.keySet()) {
 			httpSampler.addNonEncodedArgument(queryKey, queryParamsMap.get(queryKey), "=");
 		}
-
-	
 
 		httpSampler.setDomain(domain);
 		httpSampler.setProperty("HTTPSampler.port", "");
@@ -378,10 +358,9 @@ public class JMeterFromScratch {
 		httpSampler.setEmbeddedUrlRE("");
 		httpSampler.setConnectTimeout("");
 		httpSampler.setResponseTimeout("");
-		
+
 		return httpSampler;
-		
-		
+
 	}
 
 	private int threadGroupVal;
@@ -401,10 +380,6 @@ public class JMeterFromScratch {
 	private static Set<String> csvVariableNames;
 
 	Map<String, String> reqHeadMap = new LinkedHashMap<String, String>();
-	
-	
-
-
 
 	public void setQueryParamsMap(Map<String, String> queryParamsMap) {
 		this.queryParamsMap = queryParamsMap;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.1.1 r1855137">
   <hashTree>
-    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="multiproperty" enabled="true">
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="menuItems" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
       <boolProp name="TestPlan.functional_mode">false</boolProp>
       <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
@@ -25,31 +25,19 @@
         <intProp name="ThreadGroup.delay">0</intProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="multiproperty" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="menuItems" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
-              <elementProp name="areaId" elementType="HTTPArgument">
+              <elementProp name="portalId" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.name">areaId</stringProp>
-                <stringProp name="Argument.value">201</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-              </elementProp>
-              <elementProp name="arrivalDate" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.name">arrivalDate</stringProp>
-                <stringProp name="Argument.value">${arrivalDate}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-              </elementProp>
-              <elementProp name="departureDate" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.name">departureDate</stringProp>
-                <stringProp name="Argument.value">${departureDate}</stringProp>
+                <stringProp name="Argument.name">portalId</stringProp>
+                <stringProp name="Argument.value">${portalId}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
               <elementProp name="_ts" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.name">_ts</stringProp>
-                <stringProp name="Argument.value">1565678958103</stringProp>
+                <stringProp name="Argument.value">1566193771752</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
@@ -58,7 +46,7 @@
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/cc/multiPropertyAvailability</stringProp>
+          <stringProp name="HTTPSampler.path">/cc/menuItems</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -71,7 +59,7 @@
             <collectionProp name="HeaderManager.headers">
               <elementProp name="Authorization" elementType="Header">
                 <stringProp name="Header.name">Authorization</stringProp>
-                <stringProp name="Header.value">1C3BE0B3EB13492A9FAF02FFED6E9A41</stringProp>
+                <stringProp name="Header.value">155EE7C55C9D498889893A93C29D79B8</stringProp>
               </elementProp>
               <elementProp name="x-api-key" elementType="Header">
                 <stringProp name="Header.name">x-api-key</stringProp>
@@ -85,8 +73,8 @@
           </HeaderManager>
           <hashTree/>
           <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV_Data" enabled="true">
-            <stringProp name="filename">C:\Users\TT124\git\PerReportApp\perfMonitoringApp\results\multiproperty.csv</stringProp>
-            <stringProp name="variableNames">arrivalDate,departureDate,</stringProp>
+            <stringProp name="filename">C:\Users\TT124\git\PerReportApp\perfMonitoringApp\results\menuItems.csv</stringProp>
+            <stringProp name="variableNames">portalId,</stringProp>
             <stringProp name="fileEncoding"></stringProp>
             <boolProp name="ignoreFirstLine">false</boolProp>
             <stringProp name="delimiter">,</stringProp>

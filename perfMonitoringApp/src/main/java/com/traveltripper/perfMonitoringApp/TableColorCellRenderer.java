@@ -31,23 +31,19 @@ public class TableColorCellRenderer implements TableCellRenderer {
 
 			// c.setForeground(color);
 			c.setBackground(color);
-		
 
-		} 
-		else if(row == latencyRow) {
-			
+		} else if (row == latencyRow) {
+
 			c.setBackground(Color.BLUE);
-			//c.setForeground(table.getForeground());
+			// c.setForeground(table.getForeground());
 
 		}
 
-		else{
+		else {
 			c.setBackground(table.getBackground());
 			c.setForeground(table.getForeground());
 		}
 
-		
-		
 		return c;
 	}
 }
