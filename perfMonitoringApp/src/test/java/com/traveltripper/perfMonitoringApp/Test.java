@@ -6,7 +6,7 @@ public class Test {
 	{
 		Results rs = new Results();
 		
-		rs.setApiName("Availability");
+		rs.setApiName("multiPropertyApi");
 		rs.convertCsvToXlsx();
 		rs.displayResults();
 		rs.setVisible(true);

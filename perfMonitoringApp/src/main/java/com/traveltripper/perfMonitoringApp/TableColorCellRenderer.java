@@ -27,14 +27,14 @@ public class TableColorCellRenderer implements TableCellRenderer {
 
 		if (table.getValueAt(row, 4).toString().equalsIgnoreCase("GATEWAY_TIMEOUT")) {
 
-			Color color = Color.RED;
+			Color color = Color.red;
 
 			// c.setForeground(color);
 			c.setBackground(color);
 
 		} else if (row == latencyRow) {
 
-			c.setBackground(Color.BLUE);
+			c.setBackground(Color.blue);
 			// c.setForeground(table.getForeground());
 
 		}
