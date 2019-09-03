@@ -49,9 +49,6 @@ public class JMeterFromScratch {
 
 		fileProp.load(filePaths);
 
-		// //
-		// JMeterUtils.loadJMeterProperties("C:\\Users\\TT124\\Installations\\apache-jmeter-5.1.1\\bin\\jmeter.properties");
-
 		File jmeterHome = new File(fileProp.getProperty("jmeterHome")); // need to provide relative path
 
 		System.out.println("jmeterHome = " + jmeterHome);
@@ -75,11 +72,10 @@ public class JMeterFromScratch {
 				StandardJMeterEngine jmeter = new StandardJMeterEngine();
 
 				System.out.println("jmeterProperties Exists");
+				
 				// JMeter initialization (properties, log levels, locale, etc)
 				JMeterUtils.setJMeterHome(jmeterHome.getPath());
-
 				JMeterUtils.loadJMeterProperties(jmeterProperties.getPath());
-
 				JMeterUtils.initLogging();// you can comment this line out to see extra log messages of i.e. DEBUG level
 				JMeterUtils.initLocale();
 
@@ -97,7 +93,7 @@ public class JMeterFromScratch {
 
 				// LoopController
 				LoopController loopController = new LoopController();
-				loopController.setLoops(-1);
+				loopController.setLoops(1);
 				loopController.setFirst(true);
 				loopController.setProperty(TestElement.TEST_CLASS, LoopController.class.getName());
 				loopController.setProperty(TestElement.GUI_CLASS, LoopControlPanel.class.getName());
@@ -124,85 +120,122 @@ public class JMeterFromScratch {
 
 				httpSampler = getHTTPSamplerProxy();
 
-				// HeaderManager
-				HeaderManager headerManager = new HeaderManager();
-				headerManager.setName("HTTP Header Manager");
-				headerManager.setEnabled(true);
-				headerManager.setProperty(TestElement.TEST_CLASS, HeaderManager.class.getName());
-				headerManager.setProperty(TestElement.GUI_CLASS, "HeaderPanel");
-
-				for (Map.Entry<String, String> map : reqHeadMap.entrySet()) {
-					String key = map.getKey();
-					String value = map.getValue();
-					// System.out.println("in for for(Map.Entry<String, String>
-					// map:reqHeadMap.entrySet()) "+key+""+ value);
-					headerManager.add(new Header(key, value));
-				}
-
-				CSVDataSet csvDataset = null;
-				System.out.println("csvVariableNames size = " + csvVariableNames.size());
-				if (csvVariableNames.size() == 0) {
-					System.out.println("no dynamicVariable Names");
-				} else {
-					csvDataset = new CSVDataSet();
-					csvDataset = getCSVData();
-				}
+				/*
+				 * // HeaderManager HeaderManager headerManager = new HeaderManager();
+				 * headerManager.setName("HTTP Header Manager"); headerManager.setEnabled(true);
+				 * headerManager.setProperty(TestElement.TEST_CLASS,
+				 * HeaderManager.class.getName());
+				 * headerManager.setProperty(TestElement.GUI_CLASS, "HeaderPanel");
+				 * 
+				 * for (Map.Entry<String, String> map : reqHeadMap.entrySet()) { String key =
+				 * map.getKey(); String value = map.getValue(); // System.out.println("in for
+				 * for(Map.Entry<String, String> // map:reqHeadMap.entrySet()) "+key+""+ value);
+				 * headerManager.add(new Header(key, value)); }
+				 * headerAndCsvDataHashTree.add(headerManager);
+				 */
 
 				/*
 				 * // Construct Test Plan from previously initialized elements
-				 * testPlanTree.add(testPlan);
-				 * 
-				 * HashTree threadGroupHashTree = testPlanTree.add(testPlan, threadGroup);
-				 * 
-				 * // testPlanTree.add
-				 * 
-				 * // threadGroupHashTree.add(blazemetercomSampler);
-				 * 
-				 * threadGroupHashTree.add(httpSampler);
-				 */
-
-				/*
-				 * testPlanTree.add(testPlan);
-				 * 
-				 * HashTree threadGroupHashTree = new HashTree();
-				 * 
-				 * threadGroupHashTree = testPlanTree.add(testPlan,threadGroup);
-				 * 
-				 * 
-				 * 
-				 * HashTree HttpSamplerHashTree = threadGroupHashTree.add(httpSampler);
-				 * 
-				 * 
-				 * 
-				 * HttpSamplerHashTree.add(headerManager); HttpSamplerHashTree.add(csvDataset);
+				 * testPlanTree.add(testPlan); HashTree threadGroupHashTree =
+				 * testPlanTree.add(testPlan, threadGroup); // testPlanTree.add //
+				 * threadGroupHashTree.add(blazemetercomSampler);
+				 * threadGroupHashTree.add(httpSampler); testPlanTree.add(testPlan); HashTree
+				 * threadGroupHashTree = new HashTree(); threadGroupHashTree =
+				 * testPlanTree.add(testPlan,threadGroup); HashTree HttpSamplerHashTree =
+				 * threadGroupHashTree.add(httpSampler); HttpSamplerHashTree.add(headerManager);
+				 * HttpSamplerHashTree.add(csvDataset);
 				 */
 
 				HashTree TestPlanHashTree = new HashTree();
-
 				TestPlanHashTree.add(testPlan);
-
 				HashTree threadGroupHashTree = new HashTree();
-
 				threadGroupHashTree = TestPlanHashTree.add(testPlan);
-
 				threadGroupHashTree.add(threadGroup);
-
 				HashTree httpSamplerHashTree = new HashTree();
-
 				httpSamplerHashTree = threadGroupHashTree.add(threadGroup);
-
 				httpSamplerHashTree.add(httpSampler);
-
 				HashTree headerAndCsvDataHashTree = new HashTree();
-
 				headerAndCsvDataHashTree = httpSamplerHashTree.add(httpSampler);
+				// headerAndCsvDataHashTree.add(headerManager);
 
-				headerAndCsvDataHashTree.add(headerManager);
-				if (csvDataset == null) {
-					System.out.println("csvDataSet is not added to HashTree");
+				/*
+				 * if (csvDataset == null) {
+				 * System.out.println("csvDataSet is not added to HashTree");
+				 * 
+				 * } else { headerAndCsvDataHashTree.add(csvDataset); }
+				 */
 
-				} else {
-					headerAndCsvDataHashTree.add(csvDataset);
+				switch (method) {
+				case "GET":
+					CSVDataSet csvDataset = null;
+					System.out.println("csvVariableNames size = " + csvVariableNames.size());
+					if (csvVariableNames.size() == 0) {
+						System.out.println("no dynamicVariable Names");
+					} else {
+						csvDataset = new CSVDataSet();
+						csvDataset = getCSVData();
+						headerAndCsvDataHashTree.add(csvDataset);
+					}
+
+					// HeaderManager
+					HeaderManager headerManager = new HeaderManager();
+					headerManager.setName("HTTP Header Manager");
+					headerManager.setEnabled(true);
+					headerManager.setProperty(TestElement.TEST_CLASS, HeaderManager.class.getName());
+					headerManager.setProperty(TestElement.GUI_CLASS, "HeaderPanel");
+
+					for (Map.Entry<String, String> map : reqHeadMap.entrySet()) {
+						String key = map.getKey();
+						String value = map.getValue();
+						// System.out.println("in for for(Map.Entry<String, String>
+						// map:reqHeadMap.entrySet()) "+key+""+ value);
+						headerManager.add(new Header(key, value));
+					}
+					headerAndCsvDataHashTree.add(headerManager);
+
+					break;
+				case "POST":
+
+					String jsonFile = System.getProperty("user.dir") + File.separator + "results" + File.separator
+							+ "index.csv";
+					CSVDataSet csv = new CSVDataSet();
+					csv.setName("CSV_Data");
+					csv.setProperty(TestElement.TEST_CLASS, CSVDataSet.class.getName());
+					csv.setProperty(TestElement.GUI_CLASS, TestBeanGUI.class.getName());
+					csv.setEnabled(true);
+					csv.setProperty("filename", jsonFile);
+
+					csv.setProperty("variableNames", "jsonFile");
+					csv.setProperty("fileEncoding", "");
+					csv.setProperty("ignoreFirstLine", false);
+					csv.setProperty("delimiter", ",");
+					csv.setProperty("quotedData", false);
+					csv.setProperty("recycle", true);
+					csv.setProperty("stopThread", false);
+					csv.setProperty("shareMode", "shareMode.all");
+					headerAndCsvDataHashTree.add(csv);
+					 
+
+					// HeaderManager
+					HeaderManager headerManager1 = new HeaderManager();
+					headerManager1.setName("HTTP Header Manager");
+					headerManager1.setEnabled(true);
+					headerManager1.setProperty(TestElement.TEST_CLASS, HeaderManager.class.getName());
+					headerManager1.setProperty(TestElement.GUI_CLASS, "HeaderPanel");
+
+					for (Map.Entry<String, String> map : reqHeadMap.entrySet()) {
+						String key = map.getKey();
+						String value = map.getValue();
+						System.out.println(
+								"in for for(Map.Entry<String, String> map:reqHeadMap.entrySet()) " + key + "" + value);
+						headerManager1.add(new Header(key, value));
+					}
+					headerAndCsvDataHashTree.add(headerManager1);
+
+					break;
+
+				default:
+					break;
 				}
 
 				try {
@@ -265,19 +298,12 @@ public class JMeterFromScratch {
 
 				jmeter.run();
 
-				/*
-				 * System.out.println("Test completed. See  example.jtl file for results");
-				 * System.out.println("JMeter .jmx script is available at " + jmeterHome + slash
-				 * + "example.jmx");
-				 */
-
-				// System.exit(0);
 
 				Results displayResults = new Results();
 				displayResults.setApiName(apiName);
 				displayResults.convertCsvToXlsx();
 				displayResults.displayResults();
-				displayResults.setVisible(true);
+				
 
 			}
 
@@ -341,16 +367,45 @@ public class JMeterFromScratch {
 		httpSampler.setProperty(TestElement.GUI_CLASS, HttpTestSampleGui.class.getName());
 		httpSampler.setEnabled(true);
 
-		for (String queryKey : queryParamsMap.keySet()) {
-			httpSampler.addNonEncodedArgument(queryKey, queryParamsMap.get(queryKey), "=");
+		switch (method) {
+		case "GET":
+			httpSampler.setMethod(method);
+			for (String queryKey : queryParamsMap.keySet()) {
+				httpSampler.addNonEncodedArgument(queryKey, queryParamsMap.get(queryKey), "=");
+
+			}
+			break;
+		case "POST":
+			httpSampler.setMethod(method);
+			httpSampler.setPostBodyRaw(true);
+			httpSampler.addNonEncodedArgument("",
+					"${__FileToString(C:/Users/TT124/git/PerReportApp/perfMonitoringApp/results/${jsonFile}.txt,,)}",
+					"="); // ${__FileToString(${JSON_FILE},,)}
+			
+			
+
+			// httpSampler.setContentEncoding("UTF-8");
+			// HeaderManager hm = new HeaderManager();
+			// hm.setProperty("Content-Type", "application/json");
+			// httpSampler.setHeaderManager(hm);
+			// httpSampler.set
+			// httpSampler.addNonEncodedArgument("",
+			// "{\"sid\":7,\"name\":\"srikanth\",\"age\":\"21\",\"dept\":\"ui\",\"address\":null,\"accounts\":[],\"lap\":[]}",
+			// "=");
+
+			break;
+
+		default:
+			break;
 		}
 
+		// httpSampler.setc
 		httpSampler.setDomain(domain);
-		httpSampler.setProperty("HTTPSampler.port", "");
+		httpSampler.setProperty("HTTPSampler.port", "8095");
 		httpSampler.setProtocol(protocol);
 		httpSampler.setProperty("HTTPSampler.contentEncoding", "");
 		httpSampler.setPath(path);
-		httpSampler.setMethod(method);
+		// httpSampler.setMethod(method);
 		httpSampler.setFollowRedirects(true);
 		httpSampler.setAutoRedirects(false);
 		httpSampler.setUseKeepAlive(true);

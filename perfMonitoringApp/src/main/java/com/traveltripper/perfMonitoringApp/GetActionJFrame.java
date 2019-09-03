@@ -75,6 +75,7 @@ public class GetActionJFrame extends javax.swing.JFrame {
 		initComponents();
 		staticPanel.setFocusable(true);
 		setIcon();
+		setVisible(true);
 		dynamicDatePanel.setVisible(false);
 	}
 
@@ -2022,6 +2023,8 @@ public class GetActionJFrame extends javax.swing.JFrame {
 	public static void setPath(String path) {
 		GetActionJFrame.path = path;
 	}
+
+
 
 }
 //jeevan

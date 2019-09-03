@@ -20,7 +20,7 @@ public class DevDbProperty implements DbProperty {
 
 		InputStream io = this.getClass().getClassLoader().getResourceAsStream("DbProps/DevDb.properties");
 
-		// System.out.println("io obj = "+io);
+		 System.out.println("io obj = "+io);
 
 		Properties prop = new Properties();
 		try {

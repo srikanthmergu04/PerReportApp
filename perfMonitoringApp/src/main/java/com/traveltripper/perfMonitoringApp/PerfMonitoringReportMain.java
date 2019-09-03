@@ -494,12 +494,24 @@ public class PerfMonitoringReportMain extends javax.swing.JFrame {
 		switch ((String) methodDd.getSelectedItem()) {
 		case "POST":
 			setVisible(false);
+			PostScreen postScreen = new PostScreen();
+			postScreen.setApiName(apiName);
+			postScreen.setEnvironment(environment);
+			postScreen.setProtocol(protocol);
+			postScreen.setMethod(method);
+			postScreen.setDomain(domain);
+			postScreen.setPath(path);
+			postScreen.setThreadGroupVal(threadGroup);
+			postScreen.setDurationTime(time);
+			postScreen.setRampUpTime(rampUpTime);
+			postScreen.setDelayTime(delay);
+			
+			postScreen.setReqHeadMap(reqHeadMap);
 			break;
 
 		case "GET":
 			setVisible(false);
 			GetActionJFrame g = new GetActionJFrame();
-
 			g.setApiName(apiName);
 			g.setProtocol(protocol);
 			g.setMethod(method);
@@ -512,7 +524,6 @@ public class PerfMonitoringReportMain extends javax.swing.JFrame {
 			g.setPath(path);
 			g.setReqHeadMap(reqHeadMap);
 
-			g.setVisible(true);
 			break;
 
 		case "PUT":
