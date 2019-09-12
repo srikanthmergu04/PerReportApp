@@ -51,24 +51,26 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.traveltripper.perfMonitoringApp.db.DbProperty;
 import com.traveltripper.perfMonitoringApp.db.GetPropertyFactory;
 
+import temp.HashMapToJsons;
+import temp.JsonOperations;
+
 /**
  *
  * @author TT124
  */
-public class PostScreenTest extends javax.swing.JFrame {
+public class PostScreen_Jeevan extends javax.swing.JFrame {
 
 	/**
 	 * Creates new form PostScreen
 	 */
 
-	//String path = System.getProperty("user.dir");
+	// String path = System.getProperty("user.dir");
 
 	Properties prop = new Properties();
 	ArrayList<ArrayList<String>> dlist = new ArrayList<ArrayList<String>>();
-	int limit = 20;// need to get the value form the get screen
-	//String environment = "dev";// need to get the value form the get screen
+	int limit = 20;
 
-	public PostScreenTest() {
+	public PostScreen_Jeevan() {
 		initComponents();
 		setIcon();
 		setVisible(true);
@@ -227,39 +229,64 @@ public class PostScreenTest extends javax.swing.JFrame {
 
 	private void submitBtActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
 		// TODO add your handling code here:
+		/*
+		 * System.out.println("Submit Button Clicked!"); // storing .json input to
+		 * String body String body = bodyTa.getText();
+		 * 
+		 * // converting String body to .json File File jsonFile = strToJsonFile(body);
+		 * 
+		 * // Storing binding parameter to String binding. String binding =
+		 * bindingTa.getText();
+		 * 
+		 * Map<String, List<String>> keyValueMap = new LinkedHashMap<String,
+		 * List<String>>(); keyValueMap = generateKeyValueMap(binding, keyValueMap);
+		 * 
+		 * List<ArrayList<String>> keyList = new ArrayList<ArrayList<String>>(); keyList
+		 * = generateKeyList(keyValueMap.get("key"));
+		 * 
+		 * List<ArrayList<String>> valueList = new ArrayList<ArrayList<String>>();
+		 * valueList = differentiate(keyValueMap);
+		 * 
+		 * HashMap<String, Object> jsonMap = jsonToHashMap();
+		 * System.out.println("jsonMap::" + jsonMap); System.out.println("keyList::" +
+		 * keyList); System.out.println("valueList::" + valueList);
+		 * 
+		 * hashMapToJsons(jsonMap, keyList, valueList); // calling Jmeter
+		 */
+
 		System.out.println("Submit Button Clicked!");
-		//storing .json input to String body
+		// storing .json input to String body
 		String body = bodyTa.getText();
-		
-		//converting String body to .json File
+
+		// converting String body to .json File
 		File jsonFile = strToJsonFile(body);
-		
-		//Storing binding parameter to String binding.
+
+		// Storing binding parameter to String binding.
 		String binding = bindingTa.getText();
-		
-		
+
 		Map<String, List<String>> keyValueMap = new LinkedHashMap<String, List<String>>();
 		keyValueMap = generateKeyValueMap(binding, keyValueMap);
-		
+
 		List<ArrayList<String>> keyList = new ArrayList<ArrayList<String>>();
 		keyList = generateKeyList(keyValueMap.get("key"));
-		
+
 		List<ArrayList<String>> valueList = new ArrayList<ArrayList<String>>();
-		valueList=differentiate(keyValueMap);
+		valueList = differentiate(keyValueMap);
+
 		
-		/* HashMap<String, Object> jsonMap = jsonToHashMap(); */
+		//HashMap<String, Object> jsonMap = jsonToHashMap();
 		System.out.println("calling jsonToHashMap method");
 		JsonOperations jsonToObj = new JsonOperations();
 		Object object = jsonToObj.jsonToHashMap();
-		System.out.println("In PostScreen Class :: json Object = "+object);
-		  
+		System.out.println("In PostScreen Class :: json Object = " + object);
+
 		System.out.println("calling HashMapToJsons");
-		HashMapToJsons hashMapObj = new  HashMapToJsons();
-		Integer limit = 20;
-		hashMapObj.hashMapToJsons(object, keyList, valueList , limit);
+		Integer noOfJsons = 20;
+		JsonOperations hashMapObj = new JsonOperations();
+		hashMapObj.hashMapToJsons(object, keyList, valueList , noOfJsons);
 		System.out.println("N no of Jsons are created!!");
-		
-		//calling Jmeter
+		 
+
 		/*
 		 * JMeterFromScratch jm = new JMeterFromScratch();
 		 * 
@@ -271,16 +298,15 @@ public class PostScreenTest extends javax.swing.JFrame {
 		 * 
 		 * jm.run();
 		 */
-		
 	}
+
 	public List<ArrayList<String>> differentiate(Map<String, List<String>> keyValueMap) {
-		
 		List<String> value = keyValueMap.get("value");
 		List<String> key = keyValueMap.get("key");
 		List<String> arrList = new ArrayList<String>();
 		List<String> depList = new ArrayList<String>();
 		Map<String, List<String>> keyList = new LinkedHashMap<String, List<String>>();
-		int index,num,count;
+		int index, num, count;
 		String[] split;
 		String s;
 
@@ -297,15 +323,17 @@ public class PostScreenTest extends javax.swing.JFrame {
 			list = new ArrayList<String>();
 			s = (String) itr.next();
 			System.out.println("s:::" + s);
-			if (s.toUpperCase().startsWith("select".toUpperCase())) {// or SELECT
+			if (s.toUpperCase().startsWith("SELECT")) {// or SELECT
+				System.out.println("In Select");
 				list = queryValuesFromDb(s);
-				
+
 				index = value.indexOf(s);
 				keyList.put(keyValueMap.get("key").get(index), list);
 
 				dlist.add((ArrayList<String>) list);
 
 			} else if (s.contains(",")) {
+				System.out.println("In (s.contains(,)");
 				list = commaSep(s);
 
 				index = value.indexOf(s);
@@ -313,101 +341,74 @@ public class PostScreenTest extends javax.swing.JFrame {
 
 				dlist.add((ArrayList<String>) list);
 
-			} else if (s.contains("-")) {// for arrival date-num will not work, because it contains 3(-)
-				count = 0;
+			} else if (s.contains("-")) {
+				System.out.println("In Dates '-' :");
 				split = s.split("\\-");
 				num = Integer.valueOf(split[1]);
 				List<String> keys = keyValueMap.get("key");
-				for (int i = 0; i < s.length(); i++) {
-					if (s.charAt(i) == '-') {
-						count = count + 1;
-					}
-				}
-				if(split.length==3)
-				{
+
+				if (split.length == 3) {
 					arrList = generateArrDates(s);
-					
+
 					index = value.indexOf(s);
-					keyList.put(keyValueMap.get("key").get(index), list);
-
-					
+					keyList.put(keyValueMap.get("key").get(index), arrList);
 					dlist.add((ArrayList<String>) arrList);
-				}
-				/*
-				 * if (count == 2) { arrList = generateArrDates(s); count = 0;
-				 * dlist.add((ArrayList<String>) arrList); }
-				 */ else {
+				} else {
 
-					System.out.println("split[0]::" + split[0]);
 					list1 = keyList.get(split[0]);
-					System.out.println(list1);
 					itr1 = list1.iterator();
 					while (itr1.hasNext()) {
 						int val = Integer.valueOf((String) itr1.next());
 						list.add(String.valueOf((val - num)));
 					}
 
-					System.out.println("list::" + list);
-
 					index = value.indexOf(s);
 					keyList.put(keys.get(index), list);
 
-					System.out.println("keyList:::" + keyList);
 					dlist.add((ArrayList<String>) list);
-
 				}
 			} else if (s.contains("+")) {
 
 				System.out.println("--->Plus Value");
 				split = s.split("\\+");
 				num = Integer.valueOf(split[1]);
-				System.out.println("split[0]::" + split[0]);
-				System.out.println("split[1]::" + split[1]);
 				List<String> keys = keyValueMap.get("key");
 				index = keys.indexOf(split[0]);
 				String subVal = value.get(index);
-				String[] split1=subVal.split("\\-");
-					
-				if (subVal.contains("-")&&split1.length==3) {
-					
-					if (split1.length==3) {
-						arrList = generateArrDates(subVal);
+				String[] split1 = subVal.split("\\-");
+
+				if (subVal.contains("-") && split1.length == 3) {
+
+					if (split1.length == 3) {
+						System.out.println(" value "+split[0]);
+						arrList = keyList.get(split[0]);
+						System.out.println("arrival List sending to genarateDep list : "+arrList);
 						depList = generateDepDates(arrList, num);
-						
+
 						index = value.indexOf(s);
 						keyList.put(keys.get(index), depList);
-						
-						
-						dlist.add((ArrayList<String>) depList);
-						count = 0;
 
+						dlist.add((ArrayList<String>) depList);
 					}
 				} else {
 
 					split = s.split("\\+");
-					System.out.println("split::"+split[0]);
-					System.out.println("split::"+split[1]);
 					list1 = keyList.get(split[0]);
-					System.out.println("list1::"+list1);
 					itr1 = list1.iterator();
 					while (itr1.hasNext()) {
 						int val = Integer.valueOf((String) itr1.next());
 						list.add(String.valueOf((val + num)));
 					}
 
-					System.out.println("list::" + list);
 					index = value.indexOf(s);
 					keyList.put(keys.get(index), list);
-					System.out.println("keyList:::" + keyList);
 					dlist.add((ArrayList<String>) list);
 
 				}
-			}
-			else if (NumberUtils.isNumber(s)) {
-				System.out.println("In else if (NumberUtils.isNumber(s)::");
-				System.out.println("s   NumberUtils.isNumber(s)"+NumberUtils.isNumber(s));
+			} else if (NumberUtils.isNumber(s)) {// it only works for numbers, if you want this code to work for strings
+													// then remove the if condition
 				list.add(s);
-				
+
 				list = generateStringsByLimit(list, limit, list.size());
 
 				index = value.indexOf(s);
@@ -415,18 +416,23 @@ public class PostScreenTest extends javax.swing.JFrame {
 
 				dlist.add((ArrayList<String>) list);
 			}
-			System.out.println("keyList::"+keyList);
+			System.out.println("keyList::");
+			
+			for (List<String> tempList : keyList.values()) {
+				System.out.println(tempList);
+			}
+			
+		
 			
 		}
-		
-		Iterator<ArrayList<String>> iterator = dlist.iterator();
-		while(iterator.hasNext()) {
-			System.out.println(iterator.next());
+		System.out.println("Value List");
+		for (ArrayList<String> tmpList : dlist) {
+			System.out.println(tmpList);
+			
 		}
-		
 		return dlist;
 	}
-	
+
 	private List<String> generateArrDates(String date) {
 		// TODO Auto-generated method stub
 
@@ -436,20 +442,14 @@ public class PostScreenTest extends javax.swing.JFrame {
 		Date arrivalDate;
 		try {
 			arrivalDate = new java.text.SimpleDateFormat("yyyy-MM-dd").parse(date);
-			System.out.println("arrivalDate::" + arrivalDate);
 			LocalDate dateformate = arrivalDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-			int j = 0;
 			for (int i = 0; i < limit; i++) {
-				if (j <= 90) {
-					LocalDate arrivalDate1 = dateformate.plusDays(j);
-					DateTimeFormatter formatters = DateTimeFormatter.ofPattern("uuuu-MM-dd");
-					String text = arrivalDate1.format(formatters);
 
-					arraivalList.add(text);
-					j++;
-				} else {
-					j = 0;
-				}
+				LocalDate arrivalDate1 = dateformate.plusDays(rand.nextInt(90));
+				DateTimeFormatter formatters = DateTimeFormatter.ofPattern("uuuu-MM-dd");
+				String text = arrivalDate1.format(formatters);
+
+				arraivalList.add(text);
 
 			}
 
@@ -457,6 +457,7 @@ public class PostScreenTest extends javax.swing.JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("arrivalList is null"+arraivalList);
 		return arraivalList;
 	}
 
@@ -495,11 +496,8 @@ public class PostScreenTest extends javax.swing.JFrame {
 		 */
 		ArrayList<String> list = new ArrayList<String>();
 		GetPropertyFactory propFactory = new GetPropertyFactory();
-		System.out.println("propFactory::"+propFactory);
 		DbProperty prop = propFactory.getProperty("Dev");
-		System.out.println("prop::"+prop);
 		Connection con = prop.getConnection();
-		System.out.println("con::"+con);
 		Statement stmt;
 		try {
 			stmt = con.createStatement();
@@ -523,41 +521,25 @@ public class PostScreenTest extends javax.swing.JFrame {
 	private List<String> generateStringsByLimit(List<String> list, int limit, int count) {
 		// TODO Auto-generated method stub
 
-		if (limit > count) {
-			int k = 0;
-			for (int i = 0; i < limit - count; i++) {
-				if (k < count) {
-					list.add(list.get(k));
-					k++;
-				} else {
-					k = 0;
-
-					list.add(list.get(k));
-					k++;
-
-				}
-			}
-			System.out.println(list.size());
-		} else {
-			int j = 0;
-			while (list.size() != limit) {
-				list.remove(0);
-			}
+		Random rand = new Random();
+		int i = count;
+		while (limit > i) {
+			list.add(list.get(rand.nextInt(count)));
+			i++;
 		}
-		// for limit<count
-		System.out.println("generateStringsByLimit ---- list.size():" + list + "" + list.size());
+		while (list.size() != limit) {
+			list.remove(0);
+		}
 		return list;
 	}
 
-	
 	public void hashMapToJsons(Map<String, Object> myMap, java.util.List<ArrayList<String>> keyList,
-			List<ArrayList<String>> valueList)
-			throws JsonGenerationException, JsonMappingException, IOException {
-		
+			List<ArrayList<String>> valueList) throws JsonGenerationException, JsonMappingException, IOException {
+
 		String userDir = System.getProperty("user.dir");
 		File outputDir = new File("results");
 		outputDir.mkdir();
-		
+
 		ObjectMapper mapper = new ObjectMapper();
 
 		java.util.List<HashMap<String, Object>> mapList = new ArrayList<HashMap<String, Object>>();
@@ -588,7 +570,9 @@ public class PostScreenTest extends javax.swing.JFrame {
 				k++;
 			}
 			i++;
-			mapper.writeValue(new File(userDir + File.separator + outputDir + File.separator + "output" + (i+1) + ".txt"), myMap);
+			mapper.writeValue(
+					new File(userDir + File.separator + outputDir + File.separator + "output" + (i + 1) + ".txt"),
+					myMap);
 		}
 		System.out.println(".json files created , check your results folder in your current working directory.");
 	}
@@ -598,13 +582,14 @@ public class PostScreenTest extends javax.swing.JFrame {
 		String userDir = System.getProperty("user.dir");
 		File outputDir = new File("results");
 		outputDir.mkdir();
-		
+
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			Map<String, Object> myMap = mapper.readValue(new File(userDir + File.separator + outputDir + File.separator + "input.json"),
+			Map<String, Object> myMap = mapper.readValue(
+					new File(userDir + File.separator + outputDir + File.separator + "input.json"),
 					new TypeReference<Map<String, Object>>() {
 					});
-			System.out.println("jsonMap = "+myMap);
+			System.out.println("jsonMap = " + myMap);
 			System.out.println("input.json is converted to HashMap.");
 			return (HashMap<String, Object>) myMap;
 		} catch (Exception e) {
@@ -622,7 +607,6 @@ public class PostScreenTest extends javax.swing.JFrame {
 		List<String> keyList = new ArrayList<String>();
 		List<String> valueList = new ArrayList<String>();
 		while (i < bindingSplit.length) {
-			// System.out.println("index - "+i+" "+bindingSplit[i]);
 			String[] split = bindingSplit[i].split("=");
 			keyList.add(split[0]);
 			valueList.add(split[1]);
@@ -631,11 +615,9 @@ public class PostScreenTest extends javax.swing.JFrame {
 
 		keyValueMap.put("key", keyList);
 		keyValueMap.put("value", valueList);
-		System.out.println("keyAndValueMap = "+keyValueMap);
+		System.out.println("keyAndValueMap = " + keyValueMap);
 		return keyValueMap;
 	}
-
-	
 
 	public ArrayList<String> commaSep(String commSep) {
 
@@ -654,35 +636,33 @@ public class PostScreenTest extends javax.swing.JFrame {
 
 	}
 
-	
-	
 	public List<ArrayList<String>> generateKeyList(List<String> keyList) {
 		List<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
 		int i = 0;
-		// System.out.println("keyList size = "+keyList.size());
 		while (i < keyList.size()) {
 			List<String> keys = new ArrayList<String>();
 			String[] keysSplit = (keyList.get(i)).split("\\.");
-			// System.out.println("keysSplit size = "+keysSplit.length);
 			int j = 0;
 			while (j < keysSplit.length) {
-				// System.out.println("str = "+keysSplit[j]);
 				keys.add(keysSplit[j]);
 				j++;
 			}
 			list.add((ArrayList<String>) keys);
 			i++;
 		}
+		
 		System.out.println("keyList = "+list);
+		
 		return list;
 	}
 
 	public File strToJsonFile(String body) throws IOException {
-		
+
 		String userDir = System.getProperty("user.dir");
 		File outputDir = new File("results");
 		outputDir.mkdir();
-		FileWriter writer = new FileWriter(new File(userDir + File.separator + outputDir + File.separator + "input.json"));
+		FileWriter writer = new FileWriter(
+				new File(userDir + File.separator + outputDir + File.separator + "input.json"));
 		BufferedWriter buffer = new BufferedWriter(writer);
 		buffer.write(body);
 		buffer.close();
@@ -719,24 +699,24 @@ public class PostScreenTest extends javax.swing.JFrame {
 				}
 			}
 		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(PostScreenTest.class.getName()).log(java.util.logging.Level.SEVERE, null,
-					ex);
+			java.util.logging.Logger.getLogger(PostScreen_Jeevan.class.getName()).log(java.util.logging.Level.SEVERE,
+					null, ex);
 		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(PostScreenTest.class.getName()).log(java.util.logging.Level.SEVERE, null,
-					ex);
+			java.util.logging.Logger.getLogger(PostScreen_Jeevan.class.getName()).log(java.util.logging.Level.SEVERE,
+					null, ex);
 		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(PostScreenTest.class.getName()).log(java.util.logging.Level.SEVERE, null,
-					ex);
+			java.util.logging.Logger.getLogger(PostScreen_Jeevan.class.getName()).log(java.util.logging.Level.SEVERE,
+					null, ex);
 		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(PostScreenTest.class.getName()).log(java.util.logging.Level.SEVERE, null,
-					ex);
+			java.util.logging.Logger.getLogger(PostScreen_Jeevan.class.getName()).log(java.util.logging.Level.SEVERE,
+					null, ex);
 		}
 		// </editor-fold>
 
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new PostScreenTest().setVisible(true);
+				new PostScreen_Jeevan().setVisible(true);
 			}
 		});
 	}
@@ -753,8 +733,8 @@ public class PostScreenTest extends javax.swing.JFrame {
 	private javax.swing.JPanel inputPanel;
 	private javax.swing.JButton resetBt;
 	private javax.swing.JButton submitBt;
-	
-	//variables from 1st Screen
+
+	// variables from 1st Screen
 	private static String apiName;
 	private static String environment;
 	private static String protocol;
@@ -765,11 +745,9 @@ public class PostScreenTest extends javax.swing.JFrame {
 	private static int durationTime;
 	private static int rampUpTime;
 	private static int delayTime;
-	
-	//Request Headers 
+
+	// Request Headers
 	Map<String, String> reqHeadMap = new LinkedHashMap<String, String>();
-	
-	
 
 	public Map<String, String> getReqHeadMap() {
 		return reqHeadMap;
@@ -784,7 +762,7 @@ public class PostScreenTest extends javax.swing.JFrame {
 	}
 
 	public static void setApiName(String apiName) {
-		PostScreenTest.apiName = apiName;
+		PostScreen_Jeevan.apiName = apiName;
 	}
 
 	public static String getEnvironment() {
@@ -792,7 +770,7 @@ public class PostScreenTest extends javax.swing.JFrame {
 	}
 
 	public static void setEnvironment(String environment) {
-		PostScreenTest.environment = environment;
+		PostScreen_Jeevan.environment = environment;
 	}
 
 	public static String getProtocol() {
@@ -800,7 +778,7 @@ public class PostScreenTest extends javax.swing.JFrame {
 	}
 
 	public static void setProtocol(String protocol) {
-		PostScreenTest.protocol = protocol;
+		PostScreen_Jeevan.protocol = protocol;
 	}
 
 	public static String getMethod() {
@@ -808,7 +786,7 @@ public class PostScreenTest extends javax.swing.JFrame {
 	}
 
 	public static void setMethod(String method) {
-		PostScreenTest.method = method;
+		PostScreen_Jeevan.method = method;
 	}
 
 	public static String getDomain() {
@@ -816,7 +794,7 @@ public class PostScreenTest extends javax.swing.JFrame {
 	}
 
 	public static void setDomain(String domain) {
-		PostScreenTest.domain = domain;
+		PostScreen_Jeevan.domain = domain;
 	}
 
 	public static String getPath() {
@@ -824,7 +802,7 @@ public class PostScreenTest extends javax.swing.JFrame {
 	}
 
 	public static void setPath(String path) {
-		PostScreenTest.path = path;
+		PostScreen_Jeevan.path = path;
 	}
 
 	public static int getThreadGroupVal() {
@@ -832,7 +810,7 @@ public class PostScreenTest extends javax.swing.JFrame {
 	}
 
 	public static void setThreadGroupVal(int threadGroupVal) {
-		PostScreenTest.threadGroupVal = threadGroupVal;
+		PostScreen_Jeevan.threadGroupVal = threadGroupVal;
 	}
 
 	public static int getDurationTime() {
@@ -840,7 +818,7 @@ public class PostScreenTest extends javax.swing.JFrame {
 	}
 
 	public static void setDurationTime(int durationTime) {
-		PostScreenTest.durationTime = durationTime;
+		PostScreen_Jeevan.durationTime = durationTime;
 	}
 
 	public static int getRampUpTime() {
@@ -848,7 +826,7 @@ public class PostScreenTest extends javax.swing.JFrame {
 	}
 
 	public static void setRampUpTime(int rampUpTime) {
-		PostScreenTest.rampUpTime = rampUpTime;
+		PostScreen_Jeevan.rampUpTime = rampUpTime;
 	}
 
 	public static int getDelayTime() {
@@ -856,12 +834,9 @@ public class PostScreenTest extends javax.swing.JFrame {
 	}
 
 	public static void setDelayTime(int delayTime) {
-		PostScreenTest.delayTime = delayTime;
+		PostScreen_Jeevan.delayTime = delayTime;
 	}
-	
-	
-	
-	
+
 	// End of variables declaration
 }
 //changes need to do in this
