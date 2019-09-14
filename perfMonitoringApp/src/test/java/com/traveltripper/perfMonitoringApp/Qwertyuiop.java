@@ -5,17 +5,11 @@
  */
 package com.traveltripper.perfMonitoringApp;
 
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import javax.swing.ImageIcon;
- 
+import javax.swing.*;
+import java.awt.*;
+
 
 /**
- * 
- *
  * @author TT123
  */
 public class Qwertyuiop extends javax.swing.JFrame {
@@ -25,16 +19,16 @@ public class Qwertyuiop extends javax.swing.JFrame {
      */
     public Qwertyuiop() {
         initComponents();
-         delayLabel.setFocusable(true);
-         setIcon();
+        delayLabel.setFocusable(true);
+        setIcon();
     }
 
-    public void setIcon()
-    {
-    	Image image = new ImageIcon(this.getClass().getClassLoader().getResource("images/TraveltripperICon.png"))
-				.getImage();
-		setIconImage(image);
-	}
+    public void setIcon() {
+        Image image = new ImageIcon(this.getClass().getClassLoader().getResource("images/TraveltripperICon.png"))
+                .getImage();
+        setIconImage(image);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -95,6 +89,7 @@ public class Qwertyuiop extends javax.swing.JFrame {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 apiNameTfFocusGained(evt);
             }
+
             public void focusLost(java.awt.event.FocusEvent evt) {
                 apiNameTfFocusLost(evt);
             }
@@ -110,6 +105,7 @@ public class Qwertyuiop extends javax.swing.JFrame {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 domainTfFocusGained(evt);
             }
+
             public void focusLost(java.awt.event.FocusEvent evt) {
                 domainTfFocusLost(evt);
             }
@@ -125,6 +121,7 @@ public class Qwertyuiop extends javax.swing.JFrame {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 threadGroupTfFocusGained(evt);
             }
+
             public void focusLost(java.awt.event.FocusEvent evt) {
                 threadGroupTfFocusLost(evt);
             }
@@ -140,6 +137,7 @@ public class Qwertyuiop extends javax.swing.JFrame {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 timeTfFocusGained(evt);
             }
+
             public void focusLost(java.awt.event.FocusEvent evt) {
                 timeTfFocusLost(evt);
             }
@@ -155,6 +153,7 @@ public class Qwertyuiop extends javax.swing.JFrame {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 rampUpTimeTfFocusGained(evt);
             }
+
             public void focusLost(java.awt.event.FocusEvent evt) {
                 rampUpTimeTfFocusLost(evt);
             }
@@ -165,7 +164,7 @@ public class Qwertyuiop extends javax.swing.JFrame {
             }
         });
 
-        methodTf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Get", "Post", "Put", "Delete", "Patch", "Options" }));
+        methodTf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Get", "Post", "Put", "Delete", "Patch", "Options"}));
         methodTf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 methodTfActionPerformed(evt);
@@ -179,6 +178,7 @@ public class Qwertyuiop extends javax.swing.JFrame {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 delayTfFocusGained(evt);
             }
+
             public void focusLost(java.awt.event.FocusEvent evt) {
                 delayTfFocusLost(evt);
             }
@@ -196,6 +196,7 @@ public class Qwertyuiop extends javax.swing.JFrame {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 pathTfFocusGained(evt);
             }
+
             public void focusLost(java.awt.event.FocusEvent evt) {
                 pathTfFocusLost(evt);
             }
@@ -208,7 +209,7 @@ public class Qwertyuiop extends javax.swing.JFrame {
 
         environmentLabel.setText("Environment");
 
-        environmentTf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dev", "TT-QA", "PREF" }));
+        environmentTf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Dev", "TT-QA", "PREF"}));
         environmentTf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 environmentTfActionPerformed(evt);
@@ -217,92 +218,92 @@ public class Qwertyuiop extends javax.swing.JFrame {
 
         ProtocolLabel.setText("Protocol");
 
-        protocolTf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "http", "https" }));
+        protocolTf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"http", "https"}));
 
         javax.swing.GroupLayout delayLabelLayout = new javax.swing.GroupLayout(delayLabel);
         delayLabel.setLayout(delayLabelLayout);
         delayLabelLayout.setHorizontalGroup(
-            delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(delayLabelLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(delayLabelLayout.createSequentialGroup()
-                        .addComponent(ProtocolLabel)
-                        .addGap(68, 68, 68)
-                        .addComponent(protocolTf, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(delayLabelLayout.createSequentialGroup()
-                        .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(apiNameLabel)
-                                .addComponent(threadGroupLabel)
-                                .addComponent(timeLabel)
-                                .addComponent(rampUpTimeLabel)
-                                .addComponent(rampUpTimeLabel1)
-                                .addComponent(domainLabel)
-                                .addComponent(pathLabel))
-                            .addComponent(environmentLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(delayLabelLayout.createSequentialGroup()
-                                .addComponent(methodLabel)
-                                .addGap(31, 31, 31)))
-                        .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(delayLabelLayout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(rampUpTimeTf, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                                    .addComponent(apiNameTf)
-                                    .addComponent(threadGroupTf)
-                                    .addComponent(timeTf)))
-                            .addComponent(pathTf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(domainTf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(methodTf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(environmentTf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(delayTf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(delayLabelLayout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(delayLabelLayout.createSequentialGroup()
+                                                .addComponent(ProtocolLabel)
+                                                .addGap(68, 68, 68)
+                                                .addComponent(protocolTf, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(delayLabelLayout.createSequentialGroup()
+                                                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addComponent(apiNameLabel)
+                                                                .addComponent(threadGroupLabel)
+                                                                .addComponent(timeLabel)
+                                                                .addComponent(rampUpTimeLabel)
+                                                                .addComponent(rampUpTimeLabel1)
+                                                                .addComponent(domainLabel)
+                                                                .addComponent(pathLabel))
+                                                        .addComponent(environmentLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(delayLabelLayout.createSequentialGroup()
+                                                                .addComponent(methodLabel)
+                                                                .addGap(31, 31, 31)))
+                                                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(delayLabelLayout.createSequentialGroup()
+                                                                .addGap(41, 41, 41)
+                                                                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                                        .addComponent(rampUpTimeTf, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                                                                        .addComponent(apiNameTf)
+                                                                        .addComponent(threadGroupTf)
+                                                                        .addComponent(timeTf)))
+                                                        .addComponent(pathTf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(domainTf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(methodTf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(environmentTf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(delayTf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         delayLabelLayout.setVerticalGroup(
-            delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(delayLabelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(apiNameLabel)
-                    .addComponent(apiNameTf, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(environmentTf, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(environmentLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(protocolTf, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ProtocolLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(methodTf, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(methodLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(domainTf, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(domainLabel))
-                .addGap(11, 11, 11)
-                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pathTf, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pathLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(threadGroupTf, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(threadGroupLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(timeTf, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(timeLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rampUpTimeTf, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rampUpTimeLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(delayTf, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rampUpTimeLabel1))
-                .addContainerGap(13, Short.MAX_VALUE))
+                delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(delayLabelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(apiNameLabel)
+                                        .addComponent(apiNameTf, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(environmentTf, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(environmentLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(protocolTf, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(ProtocolLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(methodTf, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(methodLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(domainTf, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(domainLabel))
+                                .addGap(11, 11, 11)
+                                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(pathTf, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(pathLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(threadGroupTf, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(threadGroupLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(timeTf, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(timeLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(rampUpTimeTf, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(rampUpTimeLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(delayLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(delayTf, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(rampUpTimeLabel1))
+                                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         submitButton.setText("SUBMIT");
@@ -336,28 +337,28 @@ public class Qwertyuiop extends javax.swing.JFrame {
         javax.swing.GroupLayout buttonPanelLayout = new javax.swing.GroupLayout(buttonPanel);
         buttonPanel.setLayout(buttonPanelLayout);
         buttonPanelLayout.setHorizontalGroup(
-            buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(buttonPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(submitButton1)
-                .addGap(27, 27, 27)
-                .addComponent(submitButton)
-                .addGap(18, 18, 18)
-                .addComponent(resetButton)
-                .addGap(18, 18, 18)
-                .addComponent(closeButton)
-                .addContainerGap())
+                buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(buttonPanelLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(submitButton1)
+                                .addGap(27, 27, 27)
+                                .addComponent(submitButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(resetButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(closeButton)
+                                .addContainerGap())
         );
         buttonPanelLayout.setVerticalGroup(
-            buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttonPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(submitButton)
-                    .addComponent(resetButton)
-                    .addComponent(closeButton)
-                    .addComponent(submitButton1))
-                .addGap(25, 25, 25))
+                buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttonPanelLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(submitButton)
+                                        .addComponent(resetButton)
+                                        .addComponent(closeButton)
+                                        .addComponent(submitButton1))
+                                .addGap(25, 25, 25))
         );
 
         ImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getClassLoader().getResource("images/perfIcon.jpg"))); // NOI18N
@@ -365,251 +366,246 @@ public class Qwertyuiop extends javax.swing.JFrame {
         javax.swing.GroupLayout ImagePanelLayout = new javax.swing.GroupLayout(ImagePanel);
         ImagePanel.setLayout(ImagePanelLayout);
         ImagePanelLayout.setHorizontalGroup(
-            ImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ImagePanelLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(ImageLabel)
-                .addContainerGap(29, Short.MAX_VALUE))
+                ImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(ImagePanelLayout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(ImageLabel)
+                                .addContainerGap(29, Short.MAX_VALUE))
         );
         ImagePanelLayout.setVerticalGroup(
-            ImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ImagePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ImageLabel)
-                .addGap(70, 70, 70))
+                ImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ImagePanelLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ImageLabel)
+                                .addGap(70, 70, 70))
         );
 
         javax.swing.GroupLayout ContentPanelLayout = new javax.swing.GroupLayout(ContentPanel);
         ContentPanel.setLayout(ContentPanelLayout);
         ContentPanelLayout.setHorizontalGroup(
-            ContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ContentPanelLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(ImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(delayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContentPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                ContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(ContentPanelLayout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(ImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(delayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContentPanelLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
         );
         ContentPanelLayout.setVerticalGroup(
-            ContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ContentPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(ContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ImagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(delayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                ContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(ContentPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(ContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(ImagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(delayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ContentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ContentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ContentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(ContentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>                        
 
-    private void domainTfActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void domainTfActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }                                        
+    }
 
-    private void timeTfActionPerformed(java.awt.event.ActionEvent evt) {                                       
+    private void timeTfActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }                                      
+    }
 
-    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         System.exit(0);
-    }                                           
+    }
 
-    private void apiNameTfFocusGained(java.awt.event.FocusEvent evt) {                                      
+    private void apiNameTfFocusGained(java.awt.event.FocusEvent evt) {
         // TODO add your handling code here:
-         if(apiNameTf.getText().trim().equals("Api Name")){
-           apiNameTf.setText("");
-       }
-    }                                     
-
-    private void apiNameTfFocusLost(java.awt.event.FocusEvent evt) {                                    
-        // TODO add your handling code here:
-        if(apiNameTf.getText().trim().equals("")){
-           apiNameTf.setText("Api Name");
+        if (apiNameTf.getText().trim().equals("Api Name")) {
+            apiNameTf.setText("");
         }
-    }                                   
+    }
 
-    private void domainTfFocusGained(java.awt.event.FocusEvent evt) {                                     
+    private void apiNameTfFocusLost(java.awt.event.FocusEvent evt) {
         // TODO add your handling code here:
-         if(domainTf.getText().trim().equals("Domain")){
-           domainTf.setText("");
-       }
-    }                                    
-
-    private void domainTfFocusLost(java.awt.event.FocusEvent evt) {                                   
-        // TODO add your handling code here:
-        if(domainTf.getText().trim().equals("")){
-           domainTf.setText("Domain");
+        if (apiNameTf.getText().trim().equals("")) {
+            apiNameTf.setText("Api Name");
         }
-    }                                  
+    }
 
-    private void threadGroupTfFocusGained(java.awt.event.FocusEvent evt) {                                          
+    private void domainTfFocusGained(java.awt.event.FocusEvent evt) {
         // TODO add your handling code here:
-         if(threadGroupTf.getText().trim().equals("Thread Group")){
-           threadGroupTf.setText("");
-       }
-    }                                         
-
-    private void threadGroupTfFocusLost(java.awt.event.FocusEvent evt) {                                        
-        // TODO add your handling code here:
-         if(threadGroupTf.getText().trim().equals("")){
-           threadGroupTf.setText("Thread Group");
+        if (domainTf.getText().trim().equals("Domain")) {
+            domainTf.setText("");
         }
-    }                                       
+    }
 
-    private void timeTfFocusGained(java.awt.event.FocusEvent evt) {                                   
-         // TODO add your handling code here:
-         if(timeTf.getText().trim().equals("Time In Seconds")){
-           timeTf.setText("");
-       }
-    }                                  
-
-    private void timeTfFocusLost(java.awt.event.FocusEvent evt) {                                 
+    private void domainTfFocusLost(java.awt.event.FocusEvent evt) {
         // TODO add your handling code here:
-         if(timeTf.getText().trim().equals("")){
-           timeTf.setText("Time In Seconds");
+        if (domainTf.getText().trim().equals("")) {
+            domainTf.setText("Domain");
         }
-    }                                
+    }
 
-    private void rampUpTimeTfFocusGained(java.awt.event.FocusEvent evt) {                                         
+    private void threadGroupTfFocusGained(java.awt.event.FocusEvent evt) {
         // TODO add your handling code here:
-         if(rampUpTimeTf.getText().trim().equals("Ramp Up In Seconds")){
-           rampUpTimeTf.setText("");
-       }
-    }                                        
-
-    private void rampUpTimeTfFocusLost(java.awt.event.FocusEvent evt) {                                       
-        // TODO add your handling code here:
-         if(rampUpTimeTf.getText().trim().equals("")){
-           rampUpTimeTf.setText("Ramp Up In Seconds");
+        if (threadGroupTf.getText().trim().equals("Thread Group")) {
+            threadGroupTf.setText("");
         }
-    }                                      
+    }
 
-    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    private void threadGroupTfFocusLost(java.awt.event.FocusEvent evt) {
+        // TODO add your handling code here:
+        if (threadGroupTf.getText().trim().equals("")) {
+            threadGroupTf.setText("Thread Group");
+        }
+    }
+
+    private void timeTfFocusGained(java.awt.event.FocusEvent evt) {
+        // TODO add your handling code here:
+        if (timeTf.getText().trim().equals("Time In Seconds")) {
+            timeTf.setText("");
+        }
+    }
+
+    private void timeTfFocusLost(java.awt.event.FocusEvent evt) {
+        // TODO add your handling code here:
+        if (timeTf.getText().trim().equals("")) {
+            timeTf.setText("Time In Seconds");
+        }
+    }
+
+    private void rampUpTimeTfFocusGained(java.awt.event.FocusEvent evt) {
+        // TODO add your handling code here:
+        if (rampUpTimeTf.getText().trim().equals("Ramp Up In Seconds")) {
+            rampUpTimeTf.setText("");
+        }
+    }
+
+    private void rampUpTimeTfFocusLost(java.awt.event.FocusEvent evt) {
+        // TODO add your handling code here:
+        if (rampUpTimeTf.getText().trim().equals("")) {
+            rampUpTimeTf.setText("Ramp Up In Seconds");
+        }
+    }
+
+    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         apiNameTf.setText("Api Name");
         domainTf.setText("Domain");
         threadGroupTf.setText("Thread Group");
         timeTf.setText("Time");
         rampUpTimeTf.setText("Ramp Up");
-        
-        
-    }                                           
 
-    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        // TODO add your handling code here:
-        
-        
-                     System.out.println(apiNameTf.getText());
-                    System.out.println(protocolTf.getSelectedItem());
-                    System.out.println(methodTf.getSelectedItem());
-                    System.out.println(domainTf.getText());
-        
-                      
-                 
-                        
-                         if(methodTf.getSelectedItem().equals("Post"))
-                       {
-                            setVisible(false);   
-                           // PostActionPanel p=new PostActionPanel();
-                            // p.setVisible(true);
-                        
-                       }
-                         else 
-                         {
-                             setVisible(false);  
-                             GetActionJFrame g=new GetActionJFrame();
-                             g.setVisible(true);
-                                 
-                         }
-                        // Always close files.
-          
-        
-      //  System.exit(0);
-      
-        
-    }                                            
 
-    private void apiNameTfActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
-    }                                         
+    }
 
-    private void environmentTfActionPerformed(java.awt.event.ActionEvent evt) {                                              
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }                                             
 
-    private void threadGroupTfActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // TODO add your handling code here:
-    }                                             
 
-    private void delayTfFocusGained(java.awt.event.FocusEvent evt) {                                    
-        // TODO add your handling code here:
-         if(delayTf.getText().trim().equals("Delay In Seconds")){
-           delayTf.setText("");
-       }
-        
-    }                                   
+        System.out.println(apiNameTf.getText());
+        System.out.println(protocolTf.getSelectedItem());
+        System.out.println(methodTf.getSelectedItem());
+        System.out.println(domainTf.getText());
 
-    private void delayTfFocusLost(java.awt.event.FocusEvent evt) {                                  
-        // TODO add your handling code here:
-        
-          if(delayTf.getText().trim().equals("")){
-           delayTf.setText("Delay In Seconds");
+
+        if (methodTf.getSelectedItem().equals("Post")) {
+            setVisible(false);
+            // PostActionPanel p=new PostActionPanel();
+            // p.setVisible(true);
+
+        } else {
+            setVisible(false);
+            GetActionJFrame g = new GetActionJFrame();
+            g.setVisible(true);
+
         }
-        
-    }                                 
+        // Always close files.
 
-    private void submitButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // TODO add your handling code here:
-    }                                             
 
-    private void delayTfActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        // TODO add your handling code here:
-    }                                       
+        //  System.exit(0);
 
-    private void rampUpTimeTfActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        // TODO add your handling code here:
-    }                                            
 
-    private void pathTfFocusGained(java.awt.event.FocusEvent evt) {                                   
-        // TODO add your handling code here:
-    }                                  
+    }
 
-    private void pathTfFocusLost(java.awt.event.FocusEvent evt) {                                 
+    private void apiNameTfActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }                                
+    }
 
-    private void pathTfActionPerformed(java.awt.event.ActionEvent evt) {                                       
+    private void environmentTfActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }                                      
+    }
 
-    private void methodTfActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void threadGroupTfActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }                                        
+    }
+
+    private void delayTfFocusGained(java.awt.event.FocusEvent evt) {
+        // TODO add your handling code here:
+        if (delayTf.getText().trim().equals("Delay In Seconds")) {
+            delayTf.setText("");
+        }
+
+    }
+
+    private void delayTfFocusLost(java.awt.event.FocusEvent evt) {
+        // TODO add your handling code here:
+
+        if (delayTf.getText().trim().equals("")) {
+            delayTf.setText("Delay In Seconds");
+        }
+
+    }
+
+    private void submitButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void delayTfActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void rampUpTimeTfActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void pathTfFocusGained(java.awt.event.FocusEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void pathTfFocusLost(java.awt.event.FocusEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void pathTfActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void methodTfActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
 
     /**
      * @param args the command line arguments
@@ -618,7 +614,7 @@ public class Qwertyuiop extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -693,5 +689,5 @@ public class Qwertyuiop extends javax.swing.JFrame {
     private javax.swing.JTextField timeTf;
     // End of variables declaration                   
 
-    
+
 }

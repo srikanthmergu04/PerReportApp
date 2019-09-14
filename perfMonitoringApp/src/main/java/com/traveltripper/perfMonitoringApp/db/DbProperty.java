@@ -4,6 +4,6 @@ import java.sql.Connection;
 
 public interface DbProperty {
 
-	public Connection getConnection();
+    public Connection getConnection();
 
 }
