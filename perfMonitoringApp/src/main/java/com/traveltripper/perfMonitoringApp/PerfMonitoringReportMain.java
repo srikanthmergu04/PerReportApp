@@ -5,6 +5,8 @@
  */
 package com.traveltripper.perfMonitoringApp;
 
+import temp.PostScreen_Jeevan;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -486,7 +488,7 @@ public class PerfMonitoringReportMain extends javax.swing.JFrame {
         switch ((String) methodDd.getSelectedItem()) {
             case "POST":
                 setVisible(false);
-                PostScreen postScreen = new PostScreen();
+                PostScreen_Jeevan postScreen = new PostScreen_Jeevan();
                 postScreen.setApiName(apiName);
                 postScreen.setEnvironment(environment);
                 postScreen.setProtocol(protocol);

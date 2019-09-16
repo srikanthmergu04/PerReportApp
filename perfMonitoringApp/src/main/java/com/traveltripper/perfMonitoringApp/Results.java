@@ -66,7 +66,7 @@ public class Results extends javax.swing.JFrame {
         try {
             System.out.println("apiName = " + apiName);
             br = new BufferedReader(new FileReader(new File(System.getProperty("user.dir") + File.separator + resultsDir
-                    + File.separator + apiName + "_Jtl.jtl")));//  apiName + "_Jtl.jtl"
+                    + File.separator + "testReports.jtl")));//  apiName + "_Jtl.jtl"
 
             System.out.println("reading .jtl file" + br);
 

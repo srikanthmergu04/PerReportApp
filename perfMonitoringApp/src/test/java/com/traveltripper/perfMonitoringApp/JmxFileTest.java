@@ -16,15 +16,15 @@ public class JmxFileTest {
         StandardJMeterEngine jmeter = new StandardJMeterEngine();
 
         // Initialize Properties, logging, locale, etc.
-        JMeterUtils.loadJMeterProperties("E:/apache-jmeter-4.0/bin/jmeter.properties");
-        JMeterUtils.setJMeterHome("E:/apache-jmeter-4.0");
+        JMeterUtils.loadJMeterProperties("C:/Users/TT124/Installations/apache-jmeter-5.1.1/bin/jmeter.properties");
+        JMeterUtils.setJMeterHome("C:/Users/TT124/Installations/apache-jmeter-5.1.1");
         // JMeterUtils.initLogging();// you can comment this line out to see extra log
         // messages of i.e. DEBUG level
         JMeterUtils.initLocale();
         // Initialize JMeter SaveService
         SaveService.loadProperties();
         String worDir = System.getProperty("user.dir");
-        String abPath = worDir + File.separator + "results" + File.separator + "stuRegApi_Jmx.jmx";
+        String abPath = worDir + File.separator + "results" + File.separator + "taxPolicyApiTest_Jmx.jmx";
         // Load existing .jmx Test Plan
         HashTree testPlanTree = SaveService.loadTree(new File(abPath));
         // in.close();
@@ -38,7 +38,7 @@ public class JmxFileTest {
             summer = new Summariser(summariserName);
         }
 
-        String logFile = "results/testReports-sept6.jtl";
+        String logFile = "results/testReports.jtl";
         ResultCollector logger = new ResultCollector(summer);
         logger.setFilename(logFile);
         testPlanTree.add(testPlanTree.getArray()[0], logger);

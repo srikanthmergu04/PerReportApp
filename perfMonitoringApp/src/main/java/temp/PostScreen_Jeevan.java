@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.traveltripper.perfMonitoringApp.JMeterFromScratch;
 import com.traveltripper.perfMonitoringApp.db.DbProperty;
 import com.traveltripper.perfMonitoringApp.db.GetPropertyFactory;
 import org.apache.commons.lang.math.NumberUtils;
@@ -259,17 +260,21 @@ public class PostScreen_Jeevan extends javax.swing.JFrame {
         System.out.println("N no of Jsons are created!!");
 
 
-        /*
-         * JMeterFromScratch jm = new JMeterFromScratch();
-         *
-         * jm.setApiName(apiName); jm.setDelayTime(delayTime); jm.setDomain(domain);
-         * jm.setPath(path); jm.setDurationTime(durationTime);
-         * jm.setEnvironment(environment); jm.setMethod(method);
-         * jm.setProtocol(protocol); jm.setRampUpTime(rampUpTime);
-         * jm.setThreadGroupVal(threadGroupVal); jm.setReqHeadMap(reqHeadMap);
-         *
-         * jm.run();
-         */
+        JMeterFromScratch jm = new JMeterFromScratch();
+
+        jm.setApiName(apiName);
+        jm.setDelayTime(delayTime);
+        jm.setDomain(domain);
+        jm.setPath(path);
+        jm.setDurationTime(durationTime);
+        jm.setEnvironment(environment);
+        jm.setMethod(method);
+        jm.setProtocol(protocol);
+        jm.setRampUpTime(rampUpTime);
+        jm.setThreadGroupVal(threadGroupVal);
+        jm.setReqHeadMap(reqHeadMap);
+
+        jm.run();
     }
 
     public List<ArrayList<String>> differentiate(Map<String, List<String>> keyValueMap) {

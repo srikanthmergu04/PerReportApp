@@ -368,7 +368,7 @@ public class JMeterFromScratch {
                 httpSampler.setMethod(method);
                 httpSampler.setPostBodyRaw(true);
                 httpSampler.addNonEncodedArgument("",
-                        "${__FileToString(C:/Users/TT124/git/PerReportApp/perfMonitoringApp/results/${jsonFile}.txt,,)}",
+                        "${__FileToString(C:/Users/TT124/git/PerReportApp/perfMonitoringApp/results/${jsonFile}.json,,)}",
                         "="); // ${__FileToString(${JSON_FILE},,)}
 
 
@@ -389,7 +389,7 @@ public class JMeterFromScratch {
 
         // httpSampler.setc
         httpSampler.setDomain(domain);
-        httpSampler.setProperty("HTTPSampler.port", "8095");
+      //  httpSampler.setProperty("HTTPSampler.port", "8095");
         httpSampler.setProtocol(protocol);
         httpSampler.setProperty("HTTPSampler.contentEncoding", "");
         httpSampler.setPath(path);
