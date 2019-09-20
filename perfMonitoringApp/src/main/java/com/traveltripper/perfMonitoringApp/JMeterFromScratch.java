@@ -367,8 +367,9 @@ public class JMeterFromScratch {
             case "POST":
                 httpSampler.setMethod(method);
                 httpSampler.setPostBodyRaw(true);
+                String jsonPath = ""+System.getProperty("user.dir") + File.separator + "results" ;
                 httpSampler.addNonEncodedArgument("",
-                        "${__FileToString(C:/Users/TT124/git/PerReportApp/perfMonitoringApp/results/${jsonFile}.json,,)}",
+                        "${__FileToString(${jsonFile},,)}",
                         "="); // ${__FileToString(${JSON_FILE},,)}
 
 

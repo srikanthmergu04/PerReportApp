@@ -66,7 +66,7 @@ public class Results extends javax.swing.JFrame {
         try {
             System.out.println("apiName = " + apiName);
             br = new BufferedReader(new FileReader(new File(System.getProperty("user.dir") + File.separator + resultsDir
-                    + File.separator + "testReports.jtl")));//  apiName + "_Jtl.jtl"
+                    + File.separator + apiName + "_Jtl.jtl")));//  apiName + "_Jtl.jtl"
 
             System.out.println("reading .jtl file" + br);
 
@@ -170,6 +170,7 @@ public class Results extends javax.swing.JFrame {
             int iSECount = 0;
             int timeOutCount = 0;
             int successCount = 0;
+            int failCount = 0;
 
             List<Integer> iSERows = new ArrayList<Integer>();
             List<Integer> timeOutRows = new ArrayList<Integer>();
@@ -201,12 +202,15 @@ public class Results extends javax.swing.JFrame {
                     successCount++;
 
                 }
+                else{
+                    failCount++;
+                }
 
             }
 
             failedIseReqValLabel.setText(iSECount + "");
             failedGatewayTimoutReqValLabel.setText(timeOutCount + "");
-            failReqValLabel.setText((iSECount + timeOutCount) + "");
+            failReqValLabel.setText(failCount +"");
             successReqValLabel.setText(successCount + "");
 
             System.out.println(" Internal Server Error Count = " + iSECount);

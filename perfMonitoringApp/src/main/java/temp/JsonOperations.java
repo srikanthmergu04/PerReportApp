@@ -9,6 +9,7 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 public class JsonOperations {
+
+    List<String> jsonFilePath = new ArrayList<String>();
 
     /*
      * public static void main(String args[]) {
@@ -168,8 +171,28 @@ public class JsonOperations {
             }
             i++;
             System.out.println("json Obect = " + object);
-            mapper.writerWithDefaultPrettyPrinter().writeValue(new File("results/output" + (i) + ".json"), object);
+            mapper.writerWithDefaultPrettyPrinter().writeValue(new File(System.getProperty("user.dir") + File.separator + "results" + File.separator + "output" + (i) + ".json"), object);
+
+            jsonFilePath.add(System.getProperty("user.dir") + File.separator + "results" + File.separator + "output" + (i) + ".json");
+
         }
+
+        createJsonFilesCsv(jsonFilePath);
+
+    }
+
+    private void createJsonFilesCsv(List<String> jsonFilePath) throws IOException {
+
+
+        FileWriter file = new FileWriter(new File(System.getProperty("user.dir") + File.separator + "results" + File.separator + "index.csv"));
+
+        for (String str:jsonFilePath) {
+            file.write(str);
+            file.write("\n");
+        }
+
+        file.close();
+        System.out.println("index.csv created!");
 
     }
 }

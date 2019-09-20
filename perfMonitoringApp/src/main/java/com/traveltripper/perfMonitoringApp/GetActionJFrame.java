@@ -749,6 +749,7 @@ public class GetActionJFrame extends javax.swing.JFrame {
         }
 
         String bindingName = bindingNameTf.getText();
+        System.out.println(""+bindingName+" added !");
         limit = Integer.parseInt(limitTf.getText());
         List<String> list = new ArrayList<String>();
 
