@@ -7,6 +7,7 @@ import org.apache.jmeter.control.LoopController;
 import org.apache.jmeter.control.gui.LoopControlPanel;
 import org.apache.jmeter.control.gui.TestPlanGui;
 import org.apache.jmeter.engine.StandardJMeterEngine;
+import org.apache.jmeter.functions.FileToString;
 import org.apache.jmeter.protocol.http.control.Header;
 import org.apache.jmeter.protocol.http.control.HeaderManager;
 import org.apache.jmeter.protocol.http.control.gui.HttpTestSampleGui;
@@ -29,6 +30,7 @@ public class JMeterFromScratch {
     static String resultsDir;
 
     public void run() throws IOException {
+    	org.apache.jmeter.functions.FileToString fileToString = new FileToString();
 
         InputStream file = this.getClass().getClassLoader().getResourceAsStream("Props/jmeter.properties");
 
@@ -65,6 +67,8 @@ public class JMeterFromScratch {
                 // JMeter initialization (properties, log levels, locale, etc)
                 JMeterUtils.setJMeterHome(jmeterHome.getPath());
                 JMeterUtils.loadJMeterProperties(jmeterProperties.getPath());
+                JMeterUtils.setProperty("search_paths", System.getProperty("java.class.path"));
+                System.out.println("searchPath = "+System.getProperty("java.class.path"));
                 //JMeterUtils.initLogging();// you can comment this line out to see extra log messages of i.e. DEBUG level
                 JMeterUtils.initLocale();
 
@@ -390,7 +394,7 @@ public class JMeterFromScratch {
 
         // httpSampler.setc
         httpSampler.setDomain(domain);
-      //  httpSampler.setProperty("HTTPSampler.port", "8095");
+      httpSampler.setProperty("HTTPSampler.port", "8080");
         httpSampler.setProtocol(protocol);
         httpSampler.setProperty("HTTPSampler.contentEncoding", "");
         httpSampler.setPath(path);

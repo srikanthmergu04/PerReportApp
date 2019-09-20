@@ -85,43 +85,50 @@
             <groupId>org.apache.jmeter</groupId>
             <artifactId>ApacheJMeter_core</artifactId>
             <version>5.1.1</version>
+            <!-- <scope>provided</scope> -->
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.jmeter/ApacheJMeter_components -->
         <dependency>
             <groupId>org.apache.jmeter</groupId>
             <artifactId>ApacheJMeter_components</artifactId>
             <version>5.1.1</version>
+            <!-- <scope>provided</scope> -->
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.jmeter/ApacheJMeter_http -->
         <dependency>
             <groupId>org.apache.jmeter</groupId>
             <artifactId>ApacheJMeter_http</artifactId>
             <version>5.1.1</version>
+            <!-- <scope>provided</scope> -->
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.jmeter/jorphan -->
+   <!-- https://mvnrepository.com/artifact/org.apache.jmeter/jorphan &ndash;&gt; -->
         <dependency>
             <groupId>org.apache.jmeter</groupId>
             <artifactId>jorphan</artifactId>
             <version>5.1.1</version>
+            <!-- <scope>provided</scope> -->
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.jmeter/ApacheJMeter_java -->
         <dependency>
             <groupId>org.apache.jmeter</groupId>
             <artifactId>ApacheJMeter_java</artifactId>
             <version>5.1.1</version>
+            <!-- <scope>provided</scope> -->
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.jmeter/ApacheJMeter_functions -->
         <dependency>
             <groupId>org.apache.jmeter</groupId>
             <artifactId>ApacheJMeter_functions</artifactId>
             <version>5.1.1</version>
+            <!-- <scope>provided</scope> -->
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.jmeter/ApacheJMeter_jms -->
         <dependency>
             <groupId>org.apache.jmeter</groupId>
             <artifactId>ApacheJMeter_jms</artifactId>
             <version>5.1.1</version>
+            <!-- <scope>provided</scope> -->
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.jmeter/ApacheJMeter_slf4j_logkit -->
         <dependency>
@@ -129,20 +136,78 @@
             <artifactId>ApacheJMeter_slf4j_logkit</artifactId>
             <version>3.1</version>
             <type>pom</type>
+            <!-- <scope>provided</scope> -->
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.jmeter/ApacheJMeter_ftp -->
         <dependency>
             <groupId>org.apache.jmeter</groupId>
             <artifactId>ApacheJMeter_ftp</artifactId>
             <version>5.1.1</version>
+            <!-- <scope>provided</scope> -->
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.jmeter/ApacheJMeter_native -->
         <dependency>
             <groupId>org.apache.jmeter</groupId>
             <artifactId>ApacheJMeter_native</artifactId>
             <version>5.1.1</version>
+            <!-- <scope>provided</scope> -->
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.jmeter/ApacheJMeter_tcp -->
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_tcp</artifactId>
+            <version>5.1.1</version>
+            <!-- <scope>provided</scope> -->
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_ldap</artifactId>
+            <version>5.1.1</version>
+            <!-- <scope>provided</scope> -->
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_mail</artifactId>
+            <version>5.1.1</version>
+            <!-- <scope>provided</scope> -->
+        </dependency>
+
+        <dependency>
+        <groupId>org.apache.jmeter</groupId>
+        <artifactId>ApacheJMeter_junit</artifactId>
+        <version>5.1.1</version>
+        <!-- <scope>provided</scope> -->
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_jdbc</artifactId>
+            <version>5.1.1</version>
+            <!-- <scope>provided</scope> -->
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_mongodb</artifactId>
+            <version>5.1.1</version>
+            <!-- <scope>provided</scope> -->
+        </dependency>
+        
+       <!--   <dependency>
+            <groupId>com.lazerycode.jmeter</groupId>
+            <artifactId>jmeter-maven-plugin</artifactId>
+            <version>2.7.0</version>
+        </dependency> -->
+
+
+        <!-- https://mvnrepository.com/artifact/org.ow2.asm/asm -->
+        <dependency>
+            <groupId>org.ow2.asm</groupId>
+            <artifactId>asm</artifactId>
+            <version>7.0</version>
+        </dependency>
 
 
     </dependencies>
