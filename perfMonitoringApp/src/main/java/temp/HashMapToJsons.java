@@ -12,6 +12,10 @@ import java.util.List;
 import java.util.Map;
 
 public class HashMapToJsons {
+    public static  void main(String args[]){
+        System.out.println("jar file"+org.apache.jmeter.functions.FileToString.class.getProtectionDomain().getCodeSource().toString());
+    }
+
 
     public void hashMapToJsons(Object object, java.util.List<ArrayList<String>> keyList,
                                java.util.List<ArrayList<String>> valueList, Integer limit)

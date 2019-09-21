@@ -41,12 +41,14 @@ public class PostScreen_Jeevan extends javax.swing.JFrame {
 
     Properties prop = new Properties();
     ArrayList<ArrayList<String>> dlist = new ArrayList<ArrayList<String>>();
-    int limit = 20;
+    int limit = 0;
 
     public PostScreen_Jeevan() {
         initComponents();
         setIcon();
         setVisible(true);
+       // limit = this.threadGroupVal;
+        //System.out.println("limit = "+limit);
     }
 
     /**
@@ -202,6 +204,8 @@ public class PostScreen_Jeevan extends javax.swing.JFrame {
 
     private void submitBtActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
         // TODO add your handling code here:
+        limit = threadGroupVal;
+        System.out.println("limit = "+limit);
         /*
          * System.out.println("Submit Button Clicked!"); // storing .json input to
          * String body String body = bodyTa.getText();
@@ -254,7 +258,7 @@ public class PostScreen_Jeevan extends javax.swing.JFrame {
         System.out.println("In PostScreen Class :: json Object = " + object);
 
         System.out.println("calling HashMapToJsons");
-        Integer noOfJsons = 20;
+        Integer noOfJsons = threadGroupVal;
         JsonOperations hashMapObj = new JsonOperations();
         hashMapObj.hashMapToJsons(object, keyList, valueList, noOfJsons);
         System.out.println("N no of Jsons are created!!");
@@ -788,6 +792,7 @@ public class PostScreen_Jeevan extends javax.swing.JFrame {
     public static void setThreadGroupVal(int threadGroupVal) {
         PostScreen_Jeevan.threadGroupVal = threadGroupVal;
     }
+
 
     public static int getDurationTime() {
         return durationTime;

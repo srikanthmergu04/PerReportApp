@@ -1,32 +1,8 @@
 {
-  "propertyId" : 1196,
-  "arrivalDate" : "2019-11-22",
-  "departureDate" : "2019-11-24",
-  "numberOfAdults" : 2,
-  "numberOfChildren" : "0",
-  "nightlyRates" : [ {
-    "effectiveDate" : "2019-09-16",
-    "nightlyRate" : 210
-  }, {
-    "effectiveDate" : "2019-09-17",
-    "nightlyRate" : 210
-  } ],
-  "dateRatePlanPairs" : [ {
-    "date" : "2019-09-16",
-    "rateCode" : "09PREV",
-    "groupCode" : "",
-    "addons" : [ ],
-    "bundles" : [ ]
-  }, {
-    "date" : "2019-09-17",
-    "rateCode" : "09PREV",
-    "groupCode" : "",
-    "addons" : [ ],
-    "bundles" : [ ]
-  } ],
-  "roomCode" : "HTDK",
-  "trNumber1" : "",
-  "propertyCode" : "UEL",
-  "stayAddons" : [ ],
-  "stayBundles" : [ ]
+  "accounts" : null,
+  "address" : null,
+  "age" : 11,
+  "dept" : "ccc",
+  "lap" : null,
+  "name" : "jeevan"
 }

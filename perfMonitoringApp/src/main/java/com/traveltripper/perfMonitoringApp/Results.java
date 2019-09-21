@@ -215,14 +215,21 @@ public class Results extends javax.swing.JFrame {
 
             System.out.println(" Internal Server Error Count = " + iSECount);
             System.out.println(" Gate Way TimeOut Count =  " + timeOutCount);
-            System.out.print("max latency = " + latencyRowMap.lastKey());
+            int latencyRow = 0;
+            if(latencyRowMap.size() == 0){
+                System.out.println("none of the request are successfull");
+            }else{
+                System.out.print("max latency = " + latencyRowMap.lastKey());
+                latencyRow = latencyRowMap.get(latencyRowMap.lastKey());
+                TableColorCellRenderer renderer = new TableColorCellRenderer();
+                renderer.setLatencyRow(latencyRow);
+                table.setDefaultRenderer(Object.class, renderer);
 
-            int latencyRow = latencyRowMap.get(latencyRowMap.lastKey());
-            TableColorCellRenderer renderer = new TableColorCellRenderer();
-            renderer.setLatencyRow(latencyRow);
-            table.setDefaultRenderer(Object.class, renderer);
+                System.out.println(" latencyRow =  " + latencyRow);
+            }
 
-            System.out.println(" latencyRow =  " + latencyRow);
+
+
 
             CellStyle cellstyle = exSheet.getWorkbook().createCellStyle();
             cellstyle.setFillForegroundColor(IndexedColors.RED.getIndex());

@@ -65,6 +65,7 @@ public class JMeterFromScratch {
                 // JMeter initialization (properties, log levels, locale, etc)
                 JMeterUtils.setJMeterHome(jmeterHome.getPath());
                 JMeterUtils.loadJMeterProperties(jmeterProperties.getPath());
+                JMeterUtils.setProperty("search_paths", System.getProperty("java.class.path"));
                 //JMeterUtils.initLogging();// you can comment this line out to see extra log messages of i.e. DEBUG level
                 JMeterUtils.initLocale();
 
@@ -390,7 +391,12 @@ public class JMeterFromScratch {
 
         // httpSampler.setc
         httpSampler.setDomain(domain);
-      //  httpSampler.setProperty("HTTPSampler.port", "8095");
+        if(domain.equalsIgnoreCase("localhost")){
+            httpSampler.setProperty("HTTPSampler.port", "8080");
+        }else{
+            httpSampler.setProperty("HTTPSampler.port", "");
+        }
+
         httpSampler.setProtocol(protocol);
         httpSampler.setProperty("HTTPSampler.contentEncoding", "");
         httpSampler.setPath(path);

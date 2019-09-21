@@ -24,7 +24,7 @@ public class JmxFileTest {
         // Initialize JMeter SaveService
         SaveService.loadProperties();
         String worDir = System.getProperty("user.dir");
-        String abPath = worDir + File.separator + "results" + File.separator + "postRequestTest_Jmx.jmx";
+        String abPath = worDir + File.separator + "results" + File.separator + "abc_Jmx.jmx";
         // Load existing .jmx Test Plan
         HashTree testPlanTree = SaveService.loadTree(new File(abPath));
         // in.close();

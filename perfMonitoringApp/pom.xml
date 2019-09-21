@@ -99,7 +99,7 @@
             <version>5.1.1</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.jmeter/jorphan -->
+   <!-- https://mvnrepository.com/artifact/org.apache.jmeter/jorphan &ndash;&gt; -->
         <dependency>
             <groupId>org.apache.jmeter</groupId>
             <artifactId>jorphan</artifactId>
@@ -142,7 +142,51 @@
             <artifactId>ApacheJMeter_native</artifactId>
             <version>5.1.1</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.jmeter/ApacheJMeter_tcp -->
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_tcp</artifactId>
+            <version>5.1.1</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_ldap</artifactId>
+            <version>5.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_mail</artifactId>
+            <version>5.1.1</version>
+        </dependency>
+
+        <dependency>
+        <groupId>org.apache.jmeter</groupId>
+        <artifactId>ApacheJMeter_junit</artifactId>
+        <version>5.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_jdbc</artifactId>
+            <version>5.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_mongodb</artifactId>
+            <version>5.1.1</version>
+            <scope></scope>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.ow2.asm/asm -->
+        <dependency>
+            <groupId>org.ow2.asm</groupId>
+            <artifactId>asm</artifactId>
+            <version>7.0</version>
+        </dependency>
 
 
     </dependencies>
